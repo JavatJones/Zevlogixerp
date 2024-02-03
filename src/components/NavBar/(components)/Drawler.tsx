@@ -9,7 +9,9 @@ import { Menu } from 'lucide-react';
 
 //components
 import ToggleTheme from "@/components/ToggleTheme/ToggleTheme"
-import DropdownMenuNavBar from "@/components/NavBar/DropdownMenuNavBar"
+import DropdownMenuNavBar from "./DropdownMenuNavBar"
+
+//ui
 import { Button } from "@/components/ui/button"
 import {
     Drawer,

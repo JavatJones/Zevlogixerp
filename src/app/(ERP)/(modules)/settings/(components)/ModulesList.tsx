@@ -10,45 +10,25 @@ import {
 } from "@/components/ui/card"
 import Link from 'next/link';
 
-import { TbReceipt } from "react-icons/tb";
-import { LuSlidersHorizontal } from "react-icons/lu";
-import { GiMoneyStack } from "react-icons/gi";
-import { FaShippingFast } from "react-icons/fa";
+//icons
+import { FaBuildingUser } from "react-icons/fa6";
 
 const modules = [
     {
         id: 1,
-        icon: <FaShippingFast />,
-        name: "Embarques",
-        route: "loads"
+        icon: <FaBuildingUser />,
+        name: "Usuarios del sistema",
+        route: "users"
     },
-    {
-        id: 2,
-        icon: <TbReceipt />,
-        name: "Facturación",
-        route: "billing"
-    },
-    {
-        id: 3,
-        icon: <GiMoneyStack />,
-        name: "Ventas",
-        route: "sales"
-    },
-    {
-        id: 4,
-        icon: <LuSlidersHorizontal />,
-        name: "Configuraciones",
-        route: "settings"
-    },
-];
 
+];
 
 
 const ModulesList = () => {
     return (
         <article className='grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-10'>
             {modules.map((data, index) => (
-                <Link key={index} href={`/${data.route}`} className='hover:scale-105 transition-all'>
+                <Link key={index} href={`/settings/${data.route}`} className='hover:scale-105 transition-all'>
                     <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
                         <div className='flex items-center justify-center'>

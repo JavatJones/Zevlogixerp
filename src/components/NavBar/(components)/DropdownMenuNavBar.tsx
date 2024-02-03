@@ -1,4 +1,9 @@
 import React from 'react'
+
+//icons
+import { Bolt } from 'lucide-react';
+
+//ui
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -7,10 +12,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from '../ui/button'
-
-//icons
-import { Bolt } from 'lucide-react';
+import { Button } from '@/components/ui/button'
 
 
 const DropdownMenuNavBar = () => {
