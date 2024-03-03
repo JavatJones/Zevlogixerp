@@ -50,7 +50,7 @@ export const columns: ColumnDef<Schema>[] = [
                 }
 
                 fetchData();
-            }, []); // Asegúrate de que los corchetes estén vacíos si solo quieres que se ejecute una vez
+            }, [row.original]); // Asegúrate de que los corchetes estén vacíos si solo quieres que se ejecute una vez
 
 
             return (
