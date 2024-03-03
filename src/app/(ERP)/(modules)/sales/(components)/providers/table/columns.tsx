@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import getProviders from "@/actions/sales/getProvidersById";
+import ProviderRow from "./ProviderRow";
 
 
 export type Schema = {
@@ -36,27 +37,30 @@ export const columns: ColumnDef<Schema>[] = [
     {
         accessorKey: "provider",
         header: "Proveedor",
-        cell: ({ row }) => {
 
-            const [providerName, setProviderName] = useState('');
+        cell: ({ row }) => <ProviderRow row={row} />,
 
-            useEffect(() => {
-                async function fetchData() {
-                    const DataSchema = row.original;
-                    const idProvider = DataSchema.provider
+        // cell: ({ row }) => {
 
-                    const provider = await getProviders(idProvider);
-                    setProviderName(provider.provider?.name!);
-                }
+        //     const [providerName, setProviderName] = useState('');
 
-                fetchData();
-            }, [row.original]); // Asegúrate de que los corchetes estén vacíos si solo quieres que se ejecute una vez
+        //     useEffect(() => {
+        //         async function fetchData() {
+        //             const DataSchema = row.original;
+        //             const idProvider = DataSchema.provider
+
+        //             const provider = await getProviders(idProvider);
+        //             setProviderName(provider.provider?.name!);
+        //         }
+
+        //         fetchData();
+        //     }, [row.original]); // Asegúrate de que los corchetes estén vacíos si solo quieres que se ejecute una vez
 
 
-            return (
-                <p>{providerName || "Cargando..."}</p>
-            )
-        },
+        //     return (
+        //         <p>{providerName || "Cargando..."}</p>
+        //     )
+        // },
     },
     {
         accessorKey: "cost",
