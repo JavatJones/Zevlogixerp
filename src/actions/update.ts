@@ -12,10 +12,21 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
         return { error: "Invalid fields!" }
     }
 
-    const { id, email, name, admin, loads, finances, billing } = validatedFields.data;
+    const { id, name, admin, loads, finances, billing, contacts } = validatedFields.data;
 
 
-    // cambiar esto a un update
+    const existingUser = await db.user.findUnique({
+        where: {
+            id,
+        },
+    });
+
+    if (!existingUser) {
+        return { error: "Usuario no encontrado!" }
+
+    }
+
+
     await db.user.update({
         where: {
             id,
@@ -25,9 +36,29 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
             admin,
             loads,
             finances,
-            billing
+            billing,
+            contacts
         },
     });
+
+    // // cambiar esto a un update
+    // await db.user.update({
+    //     where: {
+    //         id,
+    //     },
+    //     data: {
+    //         name,
+    //         admin,
+    //         modules: {
+    //             update: {
+    //                 admin,
+    //                 loads,
+    //                 billing,
+    //                 finances,
+    //             }
+    //         }
+    //     },
+    // });
 
     return { success: "Usuario actualizado!" }
 }

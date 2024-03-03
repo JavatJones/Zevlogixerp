@@ -17,7 +17,7 @@ type getActualData = {
   loads: boolean;
   finances: boolean;
   billing: boolean;
-
+  contacts: boolean;
 }
 
 //ui
@@ -52,10 +52,6 @@ const EditForm: React.FC<getActualData> = (props) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter()
 
-  //unEncrypt password
-
-  // const unEncryptPassword = 
-
   //Validation
   const form = useForm<z.infer<typeof UpdateSchema>>({
     resolver: zodResolver(UpdateSchema),
@@ -67,7 +63,8 @@ const EditForm: React.FC<getActualData> = (props) => {
       admin: props.admin,
       loads: props.loads,
       finances: props.finances,
-      billing: props.billing
+      billing: props.billing,
+      contacts: props.contacts,
 
       // id: props.id,
       // name: props.name,
@@ -169,8 +166,8 @@ const EditForm: React.FC<getActualData> = (props) => {
             <Separator />
 
             <div className='flex flex-col space-y-5'>
-              <CardTitle className='font-bold text-center text-3xl'>Editar permisos</CardTitle>
-              <CardDescription className='text-center'>Edita los permisos del usuario</CardDescription>
+              <CardTitle className='font-bold text-center text-3xl'>Asignar permisos</CardTitle>
+              <CardDescription className='text-center'>Asigna los permisos del usuario</CardDescription>
 
               {/* admin */}
               <FormField
@@ -267,6 +264,31 @@ const EditForm: React.FC<getActualData> = (props) => {
                   </FormItem>
                 }}>
               </FormField>
+
+              {/* contactos */}
+              <FormField
+                control={form.control}
+                name='contacts'
+                render={({ field }) => {
+                  return <FormItem>
+                    <div className='flex flex-row justify-between items-center'>
+                      <FormLabel className='text-md'>
+                        Contactos
+                      </FormLabel>
+                      <FormControl>
+
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage></FormMessage>
+                  </FormItem>
+                }}>
+              </FormField>
+
 
             </div>
           </CardContent>

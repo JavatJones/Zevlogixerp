@@ -17,7 +17,6 @@ import DeleteUserDialog from "./DeleteUser";
 import ResetPassword from "./ResetPassword";
 
 // This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type UserInfoSchema = {
     id: string
     name: String

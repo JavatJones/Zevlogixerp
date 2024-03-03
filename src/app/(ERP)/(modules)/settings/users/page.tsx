@@ -37,6 +37,7 @@ const UserPage = async () => {
         </h1>
       </div>
       <DataTable columns={columns} data={data} />
+      
     </section>
   )
 }

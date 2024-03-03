@@ -10,11 +10,12 @@ import {
 } from "@/components/ui/card"
 import Link from 'next/link';
 
-import { TbReceipt } from "react-icons/tb";
+//icons
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { GiMoneyStack } from "react-icons/gi";
 import { FaShippingFast } from "react-icons/fa";
-
+import { RiContactsBookFill } from "react-icons/ri";
 const modules = [
     {
         id: 1,
@@ -24,7 +25,7 @@ const modules = [
     },
     {
         id: 2,
-        icon: <TbReceipt />,
+        icon: <LiaFileInvoiceDollarSolid />,
         name: "Facturación",
         route: "billing"
     },
@@ -35,7 +36,13 @@ const modules = [
         route: "sales"
     },
     {
-        id: 4,
+        id: 5,
+        icon: <RiContactsBookFill />,
+        name: "Contactos",
+        route: "contacts"
+    },
+    {
+        id: 6,
         icon: <LuSlidersHorizontal />,
         name: "Configuraciones",
         route: "settings"

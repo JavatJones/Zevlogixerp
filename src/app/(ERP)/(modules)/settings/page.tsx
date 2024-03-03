@@ -21,7 +21,7 @@ const ConfigPage = () => {
         </h1>
       </div>
 
-      <section className='container max-w-3xl'>
+      <section className='container max-w-2xl'>
         <ModulesList></ModulesList>
       </section>
 

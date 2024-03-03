@@ -46,7 +46,8 @@ const RegisterForm = () => {
             admin: false,
             loads: false,
             finances: false,
-            billing: false
+            billing: false,
+            contacts: false
         }
     });
 
@@ -127,7 +128,7 @@ const RegisterForm = () => {
                         <Separator className="my-4" />
 
                         <div className='flex flex-col space-y-5'>
-                            <CardTitle className='text-center'>Editar permisos</CardTitle>
+                            <CardTitle className='text-center'>Asignar permisos</CardTitle>
 
                             {/* admin */}
                             <FormField
@@ -221,6 +222,28 @@ const RegisterForm = () => {
                                 }}>
                             </FormField>
 
+                            {/* Modulo de contactos */}
+                            <FormField
+                                control={form.control}
+                                name='contacts'
+                                render={({ field }) => {
+                                    return <FormItem>
+                                        <div className='flex flex-row justify-between items-center'>
+                                            <FormLabel className='text-md'>
+                                                Contactos
+                                            </FormLabel>
+                                            <FormControl>
+
+                                                <Switch
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                        </div>
+                                        <FormMessage></FormMessage>
+                                    </FormItem>
+                                }}>
+                            </FormField>
 
                             <FormError message={error}></FormError>
                             <FormSuccess message={success}></FormSuccess>

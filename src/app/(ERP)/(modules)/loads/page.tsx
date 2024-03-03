@@ -4,6 +4,35 @@ import { Button } from '@/components/ui/button'
 
 //icons
 import { ChevronLeftCircle } from 'lucide-react';
+import { TfiWorld } from "react-icons/tfi";
+import { GiMexico } from "react-icons/gi";
+
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+
+const data = [
+  {
+      id: 1,
+      icon: <GiMexico />,
+      name: "Nacional",
+      route: "national"
+  },
+  {
+      id: 2,
+      icon: <TfiWorld />,
+      name: "Internacional",
+      route: "international"
+  },
+];
+
 
 const LoadsPage = () => {
   return (
@@ -19,9 +48,24 @@ const LoadsPage = () => {
         </h1>
       </div>
 
-      <section className='container'>
-        contenido
-      </section>
+      <article className='container max-w-2xl grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-10'>
+
+        {data.map((data, index) => (
+          <Link key={index} href={`/loads/${data.route}`} className='hover:scale-105 transition-all'>
+            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+              <div className='flex items-center justify-center'>
+                <p className='text-5xl text-red-600'>{data.icon}</p>
+              </div>
+
+              <div className='flex flex-col items-center justify-center font-bold'>
+                <span>{data.name}</span>
+              </div>
+            </Card>
+          </Link>
+        ))}
+
+      </article>
 
     </section>
   )

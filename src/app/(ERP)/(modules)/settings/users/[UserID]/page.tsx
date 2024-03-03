@@ -35,7 +35,7 @@ const UserIDPage = async ({ params }: { params: { UserID: string } }) => {
         </h1>
       </div>
 
-      <EditForm id={user.id} name={user.name} email={user.email} admin={user.admin} loads={user.loads} finances={user.finances} billing={user.billing}></EditForm>
+      <EditForm id={user.id} name={user.name} email={user.email} admin={user.admin} loads={user.loads} finances={user.finances} billing={user.billing} contacts={user.contacts}></EditForm>
 
     </section>
   )

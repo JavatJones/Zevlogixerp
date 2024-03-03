@@ -12,16 +12,18 @@ datasource db {
 
 model User {
   id       String    @id @default(cuid())
-  name     String?
-  email    String?   @unique
-  password String?
-  admin    Boolean?
-  loads    Boolean?
-  finances Boolean?
-  billing  Boolean?
+  name     String
+  email    String    @unique
+  password String
+  admin    Boolean
+  loads    Boolean
+  finances Boolean
+  billing  Boolean
+  contacts Boolean
   accounts Account[]
 }
 
+//manejo de sesion
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -39,4 +41,79 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+//--- --- 
+
+//Módulo de loads
+model Load {
+  id              String    @id @default(cuid())
+  load            String    @unique
+  loadType        String
+  orderDate       DateTime?
+  collectionDate  DateTime?
+  shippingDetails String?
+  recollection    String?
+  proBol          String?
+  originCity      String
+  originState     String
+  originCountry   String
+  destinyCity     String
+  destinyState    String
+  destinyCountry  String
+  invoice         String?
+  shipmentInvoice DateTime?
+  salePrice       Float?
+  profit          Float?
+
+  Fees      fees[]
+  Contact   Contact? @relation(fields: [contactId], references: [id])
+  contactId String?
+}
+
+// model Pricing {
+//   id String @id @default(cuid())
+
+//   invoice         String?
+//   shipmentInvoice DateTime?
+//   salePrice       Int?
+//   profit          Int?
+
+//   Load   Load?   @relation(fields: [loadId], references: [id], onDelete: Cascade)
+//   loadId String?
+// }
+
+model fees {
+  id        String   @id @default(cuid())
+  Load      Load?    @relation(fields: [loadId], references: [id], onDelete: Cascade)
+  loadId    String?
+  cost      Float
+  Contact   Contact? @relation(fields: [contactId], references: [id])
+  contactId String?
+}
+
+//--- --- 
+
+//Módulo de contactos
+model Contact {
+  id             String    @id @default(cuid())
+  type           String
+  name           String
+  rfc            String
+  email          String
+  AddressContact Address[]
+  Loads          Load[]
+  Fees           fees[]
+}
+
+model Address {
+  id         String @id @default(cuid())
+  address    String
+  codePostal String
+  city       String
+  state      String
+  country    String
+
+  Contact   Contact? @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  contactId String?
 }
