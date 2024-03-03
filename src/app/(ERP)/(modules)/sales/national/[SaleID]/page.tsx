@@ -38,7 +38,7 @@ const NationalSalePage = async ({ params }: { params: { SaleID: string } }) => {
             </div>
 
             <section className='flex flex-col space-y-10'>
-                <EditSaleNational id={params.SaleID} load={load.load} invoice={load.invoice} profit={load.profit} salePrice={load.salePrice} shipmentInvoice={load.shipmentInvoice} ></EditSaleNational>
+                <EditSaleNational id={params.SaleID} load={load.load} invoice={load.invoice!} profit={load.profit!} salePrice={load.salePrice!} shipmentInvoice={load.shipmentInvoice!} ></EditSaleNational>
                 <FeesProviders id={params.SaleID}></FeesProviders>
             </section>
         </section>
