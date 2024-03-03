@@ -13,6 +13,12 @@ async function getData(): Promise<UserInfoSchema[]> {
   // Fetch data from your API here.
   const users = await getAllUsers();
 
+  if (!users) {
+    // Manejar el caso en que loads sea null
+    console.error('Error: No se pudo obtener la carga');
+    return [];
+  }
+
   return users.map((user: any) => ({
     id: user.id,
     name: user.name,

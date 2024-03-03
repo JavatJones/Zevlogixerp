@@ -23,6 +23,12 @@ async function getData(): Promise<Schema[]> {
   // Fetch data from your API here.
   const loads = await getAllLoads();
 
+  if (!loads) {
+    // Manejar el caso en que loads sea null
+    console.error('Error: No se pudo obtener la carga');
+    return [];
+  }
+
   return loads.map((dt: any) => ({
     id: dt.id,
     load: dt.load,
