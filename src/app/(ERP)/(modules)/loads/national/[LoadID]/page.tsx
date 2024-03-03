@@ -40,13 +40,13 @@ const LoadPage = async ({ params }: { params: { LoadID: string } }) => {
                 <EditLoad
                     id={load.id}
                     load={load.load}
-                    client={load.contactId}
+                    client={load.contactId!}
 
-                    orderDate={load.orderDate}
-                    collectionDate={load.collectionDate}
+                    orderDate={load.orderDate!}
+                    collectionDate={load.collectionDate!}
 
-                    shippingDetails={load.shippingDetails}
-                    recollection={load.recollection}
+                    shippingDetails={load.shippingDetails!}
+                    recollection={load.recollection!}
 
 
                     originState={load.originState}

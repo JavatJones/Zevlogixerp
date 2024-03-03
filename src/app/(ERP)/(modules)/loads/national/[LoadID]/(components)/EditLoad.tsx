@@ -54,8 +54,8 @@ type LoadInformationPageEdit = {
     load: string | undefined;
     client: string | undefined;
 
-    orderDate: undefined;
-    collectionDate: undefined;
+    orderDate: Date | undefined;
+    collectionDate: Date | undefined;
 
     originState: string | undefined;
     originCity: string | undefined;

@@ -92,10 +92,10 @@ export const DeleteAddressSchema = z.object({
 //CREATE new load national
 export const CreateLoadNationalSchema = z.object({
     load: z.string().min(1, "Asigna un identificador a este load"),
-    // invoice: z.string().optional(),
-    // shipmentInvoice: z.date().optional(),
+
     orderDate: z.date(),
     collectionDate: z.date().optional(),
+
     nameClient: z.string().min(1, "Selecciona un cliente"),
 
     originCountry: z.string().min(1, "Selecciona un país"),
