@@ -30,10 +30,10 @@ type ProviderName = {
 
 export const columns: ColumnDef<Schema>[] = [
 
-    {
-        accessorKey: "id",
-        header: "Id",
-    },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
     {
         accessorKey: "provider",
         header: "Proveedor",
@@ -68,7 +68,7 @@ export const columns: ColumnDef<Schema>[] = [
         cell: ({ row }) => {
 
             return (
-                <p>{`$ ${row.original.cost} Type?` || "Cargando..."}</p>
+                <p>{`$ ${row.original.cost} MXN` || "Cargando..."}</p>
             )
         },
     },

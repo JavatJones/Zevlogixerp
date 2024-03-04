@@ -50,7 +50,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col space-y-5">
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between items-center">
         <div className="flex items-center py-4 w-full max-w-xl">
           <Input
             placeholder="Filtrar embarques..."

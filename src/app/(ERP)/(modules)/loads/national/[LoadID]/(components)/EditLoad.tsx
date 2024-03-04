@@ -212,7 +212,7 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
             load: props.load,
 
             orderDate: props.orderDate,
-            collectionDate: props.collectionDate,
+            collectionDate: props.collectionDate || undefined,
             nameClient: props.client,
             originCountry: "México",
             originState: props.originState,
@@ -378,7 +378,7 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
                                     <CardTitle>Fechas</CardTitle>
-                                    <CardDescription>Registrar nuevo load en el sistema</CardDescription>
+                                    <CardDescription>Registrar detalles de fechas</CardDescription>
                                 </CardHeader>
                                 <CardContent className='flex flex-col space-y-6'>
                                     {/* orderDate */}

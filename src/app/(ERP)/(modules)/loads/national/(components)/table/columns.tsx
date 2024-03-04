@@ -28,10 +28,10 @@ export type Schema = {
 
 export const columns: ColumnDef<Schema>[] = [
 
-    {
-        accessorKey: "id",
-        header: "Id",
-    },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
     {
         accessorKey: "load",
         header: "Embarque",
@@ -49,10 +49,18 @@ export const columns: ColumnDef<Schema>[] = [
             var orderMonth = (orderDate.getMonth() + 1).toString().padStart(2, '0'); // El mes se indexa desde 0, por lo que se agrega 1
             var orderYear = orderDate.getFullYear().toString();
 
+            if (data.orderDate === null || data.orderDate.toJSON.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${orderDay} / ${orderMonth} / ${orderYear}`}</p>
+                )
+            }
 
-            return (
-                <p>{`${orderDay} / ${orderMonth} / ${orderYear}`}</p>
-            )
         },
     },
     {
@@ -68,19 +76,63 @@ export const columns: ColumnDef<Schema>[] = [
             var recollectionMonth = (recollectionDate.getMonth() + 1).toString().padStart(2, '0'); // El mes se indexa desde 0, por lo que se agrega 1
             var recollectionYear = recollectionDate.getFullYear().toString();
 
+            if (data.collectionDate === null || data.collectionDate.toJSON.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${recollectionDay} / ${recollectionMonth} / ${recollectionYear}`}</p>
+                )
+            }
 
-            return (
-                <p>{`${recollectionDay} / ${recollectionMonth} / ${recollectionYear}`}</p>
-            )
         },
     },
     {
         accessorKey: "shippingDetails",
         header: "Detalles de envío",
+        cell: ({ row }) => {
+            const data = row.original;
+
+        
+            if (data.shippingDetails === null || data.shippingDetails.length <= 0) {
+                return (
+                    <p>
+                        Sin información
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${data.shippingDetails}`}</p>
+                )
+            }
+
+
+        },
     },
     {
         accessorKey: "recollection",
         header: "Recoleción",
+        cell: ({ row }) => {
+            const data = row.original;
+
+        
+            if (data.recollection === null || data.recollection.length <= 0) {
+                return (
+                    <p>
+                        Sin información
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${data.recollection}`}</p>
+                )
+            }
+
+
+        },
     },
 
     {

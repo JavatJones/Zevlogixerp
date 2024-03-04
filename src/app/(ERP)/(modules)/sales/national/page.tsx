@@ -18,12 +18,15 @@ async function getData(): Promise<Schema[]> {
         // Manejar el caso en que loads sea null
         console.error('Error: No se pudo obtener la carga');
         return [];
-      }
+    }
 
     return loads.map((dt: any) => ({
         id: dt.id,
         load: dt.load,
-      
+        invoice: dt.invoice,
+        salePrice: dt.salePrice,
+        profit: dt.profit,
+        shipmentInvoice: dt.shipmentInvoice
     }));
 }
 

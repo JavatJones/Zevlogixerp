@@ -148,8 +148,8 @@ export const EditSaleNationalSchema = z.object({
 
     invoice: z.string().optional(),
     shipmentInvoice: z.date().optional(),
-    salePrice: z.coerce.number().nonnegative("No puede ser negativo").default(0),
-    profit: z.coerce.number().default(0),
+    salePrice: z.coerce.number().nonnegative("No puede ser negativo").optional(),
+    profit: z.coerce.number().optional(),
 });
 
 //Module:Providers fees--------------------------------------------------------

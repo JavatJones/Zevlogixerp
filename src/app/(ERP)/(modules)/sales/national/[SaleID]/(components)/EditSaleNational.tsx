@@ -73,10 +73,12 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
         defaultValues: {
             id: props.id,
             load: props.load,
-            invoice: props.invoice || "",
-            shipmentInvoice: props.shipmentInvoice || undefined,
-            salePrice: props.salePrice || 0,
-            profit: props.profit || 0,
+
+            invoice: props.invoice,
+            shipmentInvoice: props.shipmentInvoice,
+
+            salePrice: props.salePrice,
+            profit: props.profit,
 
         }
     });
@@ -136,7 +138,7 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    className='border-0 text-2xl min-w-full'
+                                                    className='border-0 text-xl min-w-full'
                                                     placeholder='Identificador de Load'
                                                     type='text'
                                                     {...field}
@@ -285,7 +287,7 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
 
                         </CardContent>
                         <CardFooter className='flex flex-col gap-5'>
-                           
+
                             <FormError message={error}></FormError>
                             <FormSuccess message={success}></FormSuccess>
 

@@ -19,7 +19,10 @@ import Link from "next/link";
 export type Schema = {
     id: string
     load: string
-  
+    invoice: string,
+    salePrice: Float32Array,
+    profit: Float32Array,
+    shipmentInvoice: Date,
 };
 
 
@@ -32,6 +35,100 @@ export const columns: ColumnDef<Schema>[] = [
     {
         accessorKey: "load",
         header: "Embarque",
+    },
+    {
+        accessorKey: "invoice",
+        header: "Factura",
+        cell: ({ row }) => {
+            const data = row.original;
+
+
+            if (data.invoice === null || data.invoice.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${data.invoice}`}</p>
+                )
+            }
+
+
+        },
+    },
+    {
+        accessorKey: "shipmentInvoice",
+        header: "Fecha de recolección",
+        cell: ({ row }) => {
+            const data = row.original;
+
+            var recollectionDate = new Date(data.shipmentInvoice);
+
+            // Obtenemos los componentes de la fecha
+            var recollectionDay = recollectionDate.getDate().toString().padStart(2, '0');
+            var recollectionMonth = (recollectionDate.getMonth() + 1).toString().padStart(2, '0'); // El mes se indexa desde 0, por lo que se agrega 1
+            var recollectionYear = recollectionDate.getFullYear().toString();
+
+            if (data.shipmentInvoice === null || data.shipmentInvoice.toJSON.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`${recollectionDay} / ${recollectionMonth} / ${recollectionYear}`}</p>
+                )
+            }
+
+
+        },
+    },
+    {
+        accessorKey: "salePrice",
+        header: "Precio de venta",
+        cell: ({ row }) => {
+            const data = row.original;
+
+
+            if (data.salePrice === null || data.salePrice.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`$ ${data.salePrice} MXN`}</p>
+                )
+            }
+
+
+        },
+    },
+    {
+        accessorKey: "profit",
+        header: "Profit",
+        cell: ({ row }) => {
+            const data = row.original;
+
+
+            if (data.profit === null || data.profit.length <= 0) {
+                return (
+                    <p>
+                        Sin registrar
+                    </p>
+                )
+            } else {
+                return (
+                    <p>{`$ ${data.profit} MXN`}</p>
+                )
+            }
+
+
+        },
     },
     // {
     //     accessorKey: "orderDate",

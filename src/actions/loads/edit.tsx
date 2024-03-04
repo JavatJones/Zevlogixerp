@@ -12,7 +12,7 @@ const editLoad = async (values: z.infer<typeof EditLoadNationalSchema>) => {
         return { error: "Invalid fields!" }
     }
 
-    const { id, load, orderDate, collectionDate, shippingDetails, recollection, nameClient, originCountry, originState, originCity, destinyCountry, destinyState, destinyCity } = validatedFields.data;
+    const { id, orderDate, collectionDate, shippingDetails, recollection, nameClient, originCountry, originState, originCity, destinyCountry, destinyState, destinyCity } = validatedFields.data;
 
     // const existingLoad = await getNationalLoadByLoadID(load)
 
@@ -22,38 +22,36 @@ const editLoad = async (values: z.infer<typeof EditLoadNationalSchema>) => {
     // }
 
 
-    // Crear nuevo embarque
-    // await db.load.create({
-    //     data: {
-    //         load,
-    //         loadType: "National",
-    //         orderDate,
-    //         collectionDate,
+    // editar nuevo embarque
+    await db.load.update({
+        where: {
+            id
+        },
+        data: {
 
-    //         shippingDetails,
-    //         recollection,
+            Contact: {
+                connect: { id: nameClient }
+            },
 
-    //         Contact: {
-    //             connect: { id: nameClient }
-    //         },
+            orderDate,
+            collectionDate,
 
-    //         LoadLotacionts: {
-    //             create: {
+            shippingDetails,
+            recollection,
 
-    //                 originCity,
-    //                 originState,
-    //                 originCountry,
+            originCountry,
+            originState,
+            originCity,
 
-    //                 destinyCountry,
-    //                 destinyState,
-    //                 destinyCity,
-    //             },
-    //         },
-    //     },
-    // });
+            destinyCountry,
+            destinyState,
+            destinyCity,
+
+        },
+    });
 
 
-    return { success: `¡Embarque modificado! ${destinyState}, ${destinyCity}` }
+    return { success: `¡Embarque modificado!` }
 }
 
 export default editLoad
