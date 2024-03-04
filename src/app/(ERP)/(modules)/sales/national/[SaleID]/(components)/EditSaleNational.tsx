@@ -106,11 +106,7 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
 
                     <div className='flex flex-row justify-end'>
                         <div className='flex flex-row space-x-4'>
-                            <Button asChild className='w-full hidden' variant={'ghost'} disabled={isPending}>
-                                <Link href={"/sales/national"}>
-                                    <p>Volver</p>
-                                </Link>
-                            </Button>
+
                             <Button className='w-full' type='submit' disabled={isPending}>
 
                                 {isPending ?
