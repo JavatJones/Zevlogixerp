@@ -19,27 +19,29 @@ import { Schema, columns } from './(components)/table/columns'
 import { ChevronLeftCircle } from 'lucide-react';
 
 
-async function getData(): Promise<Schema[]> {
-  // Fetch data from your API here.
-  const loads = await getAllLoads();
 
-  if (!loads) {
-    // Manejar el caso en que loads sea null
-    console.error('Error: No se pudo obtener la carga');
-    return [];
-  }
-
-  return loads.map((dt: any) => ({
-    id: dt.id,
-    load: dt.load,
-    orderDate: dt.orderDate,
-    collectionDate: dt.collectionDate,
-    shippingDetails: dt.shippingDetails,
-    recollection: dt.recollection,
-  }));
-}
 
 const NationalLoadsPage = async () => {
+
+  async function getData(): Promise<Schema[]> {
+    // Fetch data from your API here.
+    const loads = await getAllLoads();
+
+    if (!loads) {
+      // Manejar el caso en que loads sea null
+      console.error('Error: No se pudo obtener la carga');
+      return [];
+    }
+
+    return loads.map((dt: any) => ({
+      id: dt.id,
+      load: dt.load,
+      orderDate: dt.orderDate,
+      collectionDate: dt.collectionDate,
+      shippingDetails: dt.shippingDetails,
+      recollection: dt.recollection,
+    }));
+  }
 
   const data = await getData();
 
