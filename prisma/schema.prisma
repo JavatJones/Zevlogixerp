@@ -11,16 +11,18 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  name     String
-  email    String    @unique
-  password String
-  admin    Boolean
-  loads    Boolean
-  finances Boolean
-  billing  Boolean
-  contacts Boolean
-  accounts Account[]
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  password   String
+  admin      Boolean
+  loads      Boolean
+  finances   Boolean
+  billing    Boolean
+  contacts   Boolean
+  accounts   Account[]
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  updated_at DateTime  @updatedAt @db.Timestamp(0)
 }
 
 //manejo de sesion
@@ -65,31 +67,22 @@ model Load {
   shipmentInvoice DateTime?
   salePrice       Float?
   profit          Float?
-
-  Fees      fees[]
-  Contact   Contact? @relation(fields: [contactId], references: [id])
-  contactId String?
+  Fees            fees[]
+  Contact         Contact?  @relation(fields: [contactId], references: [id])
+  contactId       String?
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime  @updatedAt @db.Timestamp(0)
 }
 
-// model Pricing {
-//   id String @id @default(cuid())
-
-//   invoice         String?
-//   shipmentInvoice DateTime?
-//   salePrice       Int?
-//   profit          Int?
-
-//   Load   Load?   @relation(fields: [loadId], references: [id], onDelete: Cascade)
-//   loadId String?
-// }
-
 model fees {
-  id        String   @id @default(cuid())
-  Load      Load?    @relation(fields: [loadId], references: [id], onDelete: Cascade)
-  loadId    String?
-  cost      Float
-  Contact   Contact? @relation(fields: [contactId], references: [id])
-  contactId String?
+  id         String   @id @default(cuid())
+  Load       Load?    @relation(fields: [loadId], references: [id], onDelete: Cascade)
+  loadId     String?
+  cost       Float
+  Contact    Contact? @relation(fields: [contactId], references: [id])
+  contactId  String?
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @updatedAt @db.Timestamp(0)
 }
 
 //--- --- 
@@ -104,16 +97,19 @@ model Contact {
   AddressContact Address[]
   Loads          Load[]
   Fees           fees[]
+  created_at     DateTime  @default(now()) @db.Timestamp(0)
+  updated_at     DateTime  @updatedAt @db.Timestamp(0)
 }
 
 model Address {
-  id         String @id @default(cuid())
+  id         String   @id @default(cuid())
   address    String
   codePostal String
   city       String
   state      String
   country    String
-
-  Contact   Contact? @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  contactId String?
+  Contact    Contact? @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  contactId  String?
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @updatedAt @db.Timestamp(0)
 }

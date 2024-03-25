@@ -8,11 +8,11 @@ import { CreateLoadNationalSchema } from "@/schemas/index"
 import { getContactClient } from '@/data/contacts';
 
 
-const createLoad = async () => {
+const getClients = async () => {
 
     const clients = await getContactClient()
 
     return { clients }
 }
 
-export default createLoad
+export default getClients

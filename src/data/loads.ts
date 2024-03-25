@@ -54,3 +54,21 @@ export const getAllLoadsInternational = async () => {
         return null;
     }
 }
+
+
+//------------General gets
+
+
+export const allLoadsByContactID = async (ContactId: string) => {
+    try {
+        const data = await db.load.findMany({
+            where: {
+                contactId: ContactId,
+            },
+        });
+
+        return data;
+    } catch {
+        return null;
+    }
+}

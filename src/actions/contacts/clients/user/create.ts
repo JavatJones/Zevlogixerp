@@ -3,6 +3,7 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { CreateNewClientSchema } from "@/schemas/index"
+import { NextResponse } from "next/server";
 
 const createClient = async (values: z.infer<typeof CreateNewClientSchema>) => {
     const validatedFields = CreateNewClientSchema.safeParse(values);

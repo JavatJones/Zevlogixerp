@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 
 //validation
@@ -35,8 +36,8 @@ import { FormSuccess } from '@/components/forms/form-success'
 
 
 const DeleteUserDialog: React.FC<getUser> = (props) => {
-    const [error, setError] = useState<string | undefined>("");
-    const [success, setSuccess] = useState<string | undefined>("");
+    const [error, setError] = useState<string | undefined>('');
+    const [success, setSuccess] = useState<string | undefined>('');
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
 
@@ -51,20 +52,46 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
 
     //upload user to delete
     const onSubmit = (values: z.infer<typeof DeleteUserSchema>) => {
-        setError("");
-        setSuccess("");
+        setError('');
+        setSuccess('');
 
         startTransition(() => {
             deleteUser(values)
                 .then((data) => {
-                    setError(data.error);
-                    setSuccess(data.success);
-                    router.push('/contacts/clients');
-                    router.refresh();
+
+                    setSuccess(data.success)
+                    setError(data.error)
+
+                    if (data.error === undefined) {
+                        router.push(`/contacts/clients`)
+                    }
+
+                    router.refresh()
+
+                    toast.success(data.success?.toString())
+                    toast.error(data.error?.toString())
+
+
 
                 })
+                .catch((error) => {
+                    console.log(error)
+                })
+                .finally(() => {
+
+                })
+
         });
 
+
+    }
+
+
+    //Clear Message 
+    const clearMessage = () => {
+        setError("");
+        setSuccess("");
+        router.refresh();
     }
 
 
@@ -82,36 +109,15 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                 <Form {...form}>
                     <form id='' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
 
-                        <AlertDialogDescription>
-                            {/* dummy for id*/}
-                            <FormField
-                                control={form.control}
-                                name='id'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='hidden flex-row space-x-4 items-center'>
-                                            <FormLabel className='text-md'>
-                                                id
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='id' type='text' {...field} disabled></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
+                        <AlertDialogDescription className='flex flex-col space-y-5'>
 
                             Esta acción no se puede deshacer. Esto borrará permanentemente la cuenta del sistema.
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
 
                         </AlertDialogDescription>
 
                         <AlertDialogFooter>
                             <AlertDialogCancel asChild>
-                                <Button variant={'ghost'}>
+                                <Button variant={'ghost'} onClick={() => clearMessage()}>
                                     Volver
                                 </Button>
                             </AlertDialogCancel>

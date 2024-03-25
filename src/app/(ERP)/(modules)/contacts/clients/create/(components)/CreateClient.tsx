@@ -18,6 +18,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -33,8 +34,8 @@ import { FormSuccess } from '@/components/forms/form-success'
 
 const CreateClient = () => {
 
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -48,17 +49,33 @@ const CreateClient = () => {
   });
 
   const onSubmit = (values: z.infer<typeof CreateNewClientSchema>) => {
-    setError("");
-    setSuccess("");
+    setError('');
+    setSuccess('');
 
     startTransition(() => {
       create(values)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+
+          setSuccess(data.success)
+          setError(data.error)
+
+          if (data.error === undefined) {
+            form.reset()
+            router.refresh();
+            router.push('/contacts/clients');
+            router.refresh();
+          }
+
+          toast.success(data.success?.toString())
+          toast.error(data.error?.toString())
+
+
+        })
+        .catch((error) => {
+          console.log(error)
         })
     });
-    router.refresh();
+
   }
 
   return (
@@ -121,8 +138,8 @@ const CreateClient = () => {
               }}>
             </FormField>
 
-            <FormError message={error}></FormError>
-            <FormSuccess message={success}></FormSuccess>
+            {/* <FormError message={error}></FormError>
+            <FormSuccess message={success}></FormSuccess> */}
 
 
             <div className='flex flex-row space-x-4'>

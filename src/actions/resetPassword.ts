@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import * as z from "zod";
 import bcrypt from "bcrypt";
 import { ResetPasswordSchema } from "@/schemas/index"
+import { getUserByID } from "@/data/user";
 
 const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
     const validatedFields = ResetPasswordSchema.safeParse(values);
@@ -12,8 +13,18 @@ const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
     }
 
     const { id, password } = validatedFields.data;
+
+    //Check if the user exists
+    const existingUser = await getUserByID(id);
+
+    if (!existingUser) {
+        return { error: "¡No existe el usuario!" }
+    }
+
+    //hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Update user
     await db.user.update({
         where: {
             id,

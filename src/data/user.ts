@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 
+//Obtener usuario por Email
 export const getUserByEmail = async (email: string) => {
     try {
         const user = await db.user.findUnique({ where: { email } })
@@ -9,6 +10,8 @@ export const getUserByEmail = async (email: string) => {
     }
 }
 
+
+//Obtener usuario por ID
 export const getUserByID = async (id: string) => {
     try {
         const user = await db.user.findUnique({ where: { id } })
@@ -18,6 +21,7 @@ export const getUserByID = async (id: string) => {
     }
 }
 
+//Obtener todos los usuarios
 export const getAllUsers = async () => {
     try {
         const users = await db.user.findMany();
@@ -26,3 +30,5 @@ export const getAllUsers = async () => {
         return null;
     }
 }
+
+

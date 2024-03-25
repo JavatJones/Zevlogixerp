@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import * as z from "zod";
 import { CreateLoadNationalSchema } from "@/schemas/index"
 
-//get users client
+//get
 import { getContactProvider } from '@/data/contacts';
 
 

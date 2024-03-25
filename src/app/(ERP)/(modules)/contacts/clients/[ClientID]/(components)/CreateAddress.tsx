@@ -72,6 +72,14 @@ const CreateAddress: React.FC<ClientData> = (props) => {
 
     }
 
+    //Clear Message 
+    const clearMessage = () => {
+        setError("");
+        setSuccess("");
+
+    }
+
+
     return (
         <AlertDialog>
 
@@ -211,7 +219,7 @@ const CreateAddress: React.FC<ClientData> = (props) => {
 
                         <AlertDialogFooter>
                             <AlertDialogCancel asChild>
-                                <Button variant={'ghost'}>
+                                <Button variant={'ghost'} onClick={() => clearMessage()}>
                                     Volver
                                 </Button>
                             </AlertDialogCancel>

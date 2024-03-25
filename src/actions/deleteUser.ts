@@ -3,6 +3,9 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { DeleteUserSchema } from "@/schemas/index"
+import { getUserByID } from "@/data/user";
+
+
 const deleteUser = async (values: z.infer<typeof DeleteUserSchema>) => {
     const validatedFields = DeleteUserSchema.safeParse(values);
     if (!validatedFields.success) {
@@ -11,7 +14,15 @@ const deleteUser = async (values: z.infer<typeof DeleteUserSchema>) => {
 
     const { id } = validatedFields.data;
 
-    // delete user
+    //Check if the user exists
+    const existingUser = await getUserByID(id);
+
+    if (!existingUser) {
+        return { error: "¡No existe el usuario!" }
+    }
+
+
+    // Delete user
     await db.user.delete({
         where: {
             id,
@@ -20,7 +31,7 @@ const deleteUser = async (values: z.infer<typeof DeleteUserSchema>) => {
     });
 
 
-    return { success: "Usuario borrado!" }
+    return { success: "¡Usuario borrado!" }
 }
 
 export default deleteUser

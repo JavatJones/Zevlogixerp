@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 
 //validation
@@ -59,7 +60,17 @@ const DeleteLoad: React.FC<getLoad> = (props) => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
-                    router.refresh();
+
+                    if (data.error === undefined) {
+                        router.refresh();
+                    }
+
+                    toast.success(data.success?.toString());
+                    toast.error(data.error?.toString());
+
+                })
+                .catch((error) => {
+                    console.log(error)
                 })
         });
 
@@ -80,29 +91,8 @@ const DeleteLoad: React.FC<getLoad> = (props) => {
                     <form id='' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
 
                         <AlertDialogDescription>
-                            {/* dummy for id*/}
-                            <FormField
-                                control={form.control}
-                                name='id'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='hidden flex-row space-x-4 items-center'>
-                                            <FormLabel className='text-md'>
-                                                id
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='id' type='text' {...field} disabled></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
 
                             Esta acción no se puede deshacer. Esto borrará permanentemente del sistema.
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
 
                         </AlertDialogDescription>
 

@@ -27,7 +27,6 @@ const createAddress = async (values: z.infer<typeof CreateNewAddressClientSchema
         },
     });
 
-    console.log(id, address, city, state, codePostal, country)
     return { success: "¡Se ha agregado la dirección!" }
 }
 

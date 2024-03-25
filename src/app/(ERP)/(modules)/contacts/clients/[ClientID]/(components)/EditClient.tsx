@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 
 //validation
@@ -64,13 +65,38 @@ const EditClient: React.FC<ClientData> = (props) => {
     startTransition(() => {
       updateClient(values)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
-          router.refresh();
+
+          setSuccess(data.success)
+          setError(data.error)
+
+          if (data.error === undefined) {
+            router.refresh()
+          }
+
+          toast.success(data.success?.toString())
+          toast.error(data.error?.toString())
+
+
+        })
+        .catch((error) => {
+          console.log(error)
         })
     });
 
+
+
+
   }
+
+  //Clear Message 
+  const clearMessage = () => {
+    setError("");
+    setSuccess("");
+
+
+
+  }
+
 
   return (
     <AlertDialog>
@@ -88,9 +114,9 @@ const EditClient: React.FC<ClientData> = (props) => {
             <AlertDialogDescription className='flex flex-col space-y-5'>
 
               <p>Esta acción no se puede deshacer. Esto editara los campos del sistema.</p>
-             
+
               {/* dummy for id*/}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='id'
                 render={({ field }) => {
@@ -106,7 +132,7 @@ const EditClient: React.FC<ClientData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
 
               <FormField
@@ -163,25 +189,22 @@ const EditClient: React.FC<ClientData> = (props) => {
                 }}>
               </FormField>
 
-              <FormError message={error}></FormError>
-              <FormSuccess message={success}></FormSuccess>
-
             </AlertDialogDescription>
 
             <AlertDialogFooter>
               <AlertDialogCancel asChild>
-                <Button variant={'ghost'}>
+                <Button variant={'ghost'} onClick={() => clearMessage()}>
                   Volver
                 </Button>
               </AlertDialogCancel>
-              <Button type='submit' disabled={isPending}>
+              <AlertDialogAction type='submit' disabled={isPending}>
 
                 {isPending ?
                   <p>Actualizando...</p>
                   :
                   <p>Confirmar</p>
                 }
-              </Button>
+              </AlertDialogAction>
             </AlertDialogFooter>
           </form>
         </Form>

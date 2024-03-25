@@ -37,6 +37,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Switch } from '@/components/ui/switch'
 import { Separator } from "@/components/ui/separator"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -185,8 +186,6 @@ const CreateLoadNational = () => {
         resolver: zodResolver(CreateLoadNationalSchema),
         defaultValues: {
             load: "",
-            // invoice: "",
-            // shipmentInvoice: undefined,
             orderDate: undefined,
             collectionDate: undefined,
             nameClient: "",
@@ -214,7 +213,22 @@ const CreateLoadNational = () => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
-                });
+
+                    if (data.error === undefined) {
+                        form.reset()
+                        router.refresh();
+                        router.push('/loads/national');
+                        router.refresh();
+                    }
+
+                    toast.success(data.success?.toString())
+                    toast.error(data.error?.toString())
+
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         });
 
         router.refresh();
@@ -249,79 +263,6 @@ const CreateLoadNational = () => {
                             }}>
                         </FormField>
 
-                        {/*
-                        <Separator></Separator>
-
-                         <CardHeader>
-                            <CardTitle className='font-bold text-center text-3xl'>Facturación</CardTitle>
-                            <CardDescription className='text-center'>Descripción del tema de facturación</CardDescription>
-                        </CardHeader>
-                         */}
-
-                        {/* Invoice 
-                        <FormField
-                            control={form.control}
-                            name='invoice'
-                            render={({ field }) => {
-                                return <FormItem>
-                                    <FormLabel className='text-md'>
-                                        Factura
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input placeholder='Identificador de factura' type='text' {...field} disabled={isPending}></Input>
-                                    </FormControl>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
-*/}
-                        {/* shipmentInvoice 
-                        <FormField
-                            control={form.control}
-                            name='shipmentInvoice'
-                            render={({ field }) => {
-                                return <FormItem className='flex flex-col'>
-                                    <FormLabel className='text-md'>
-                                        Envío de factura
-                                    </FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    disabled={isPending}
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "w-full pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Elige una fecha</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                selected={field.value}
-                                                onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    // date > new Date() || 
-                                                    date < new Date("1900-01-01")
-                                                }
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
-*/}
                         <Separator></Separator>
 
                         <CardHeader>
@@ -803,9 +744,7 @@ const CreateLoadNational = () => {
 
                         <Separator></Separator>
 
-                        <FormError message={error}></FormError>
-                        <FormSuccess message={success}></FormSuccess>
-
+                       
 
                         <div className='flex flex-row space-x-4'>
                             <Button asChild className='w-full' variant={'ghost'} disabled={isPending}>

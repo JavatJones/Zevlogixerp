@@ -15,21 +15,14 @@ const createProvider = async (values: z.infer<typeof CreateFeeSchema>) => {
 
     const { loadId, provider, cost } = validatedFields.data;
 
-    // const existingLoad = await getNationalLoadByLoadID(load)
-
-    // if (existingLoad) {
-    //     return { error: "El load ingresado ya existe!" }
-
-    // }
-
-
     // Crear nuevo proveedor para el embarque
     await db.fees.create({
         data: {
             cost,
 
             Contact: {
-                connect: { id: provider }
+                connect: { id: provider },
+               
             },
 
             Load: {

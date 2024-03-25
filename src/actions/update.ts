@@ -3,9 +3,9 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { UpdateSchema } from "@/schemas/index"
+import { getUserByID } from "@/data/user";
 
-// error: "Invalid fields!"
-//success: "¡El usuario ha sido actualizado!" 
+
 const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
     const validatedFields = UpdateSchema.safeParse(values);
     if (!validatedFields.success) {
@@ -15,18 +15,14 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
     const { id, name, admin, loads, finances, billing, contacts } = validatedFields.data;
 
 
-    const existingUser = await db.user.findUnique({
-        where: {
-            id,
-        },
-    });
+    //Check if the user exists
+    const existingUser = await getUserByID(id);
 
     if (!existingUser) {
-        return { error: "Usuario no encontrado!" }
-
+        return { error: "¡No existe el usuario!" }
     }
 
-
+    //Update User
     await db.user.update({
         where: {
             id,
@@ -41,24 +37,6 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
         },
     });
 
-    // // cambiar esto a un update
-    // await db.user.update({
-    //     where: {
-    //         id,
-    //     },
-    //     data: {
-    //         name,
-    //         admin,
-    //         modules: {
-    //             update: {
-    //                 admin,
-    //                 loads,
-    //                 billing,
-    //                 finances,
-    //             }
-    //         }
-    //     },
-    // });
 
     return { success: "Usuario actualizado!" }
 }
