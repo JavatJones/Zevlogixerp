@@ -14,10 +14,22 @@ import { Button } from "@/components/ui/button"
 //icons
 import { CiUser } from "react-icons/ci";
 
+
+//db
+import { db } from "@/lib/db";
+
 const ClientsList = async () => {
 
 
-    const GetClients = await getContactClient();
+    // const GetClients = await getContactClient();
+
+    const GetClients = await db.contact.findMany({
+        where: {
+            type: "Client",
+        },
+    });
+
+
 
     return (
         <div className='flex flex-col space-y-8'>
