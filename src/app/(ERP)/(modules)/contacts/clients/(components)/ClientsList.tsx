@@ -1,6 +1,8 @@
-import React from 'react';
-import { getContactClient } from '@/data/contacts'
+'use client'
+import React, { useEffect } from 'react';
 import Link from 'next/link'
+
+//ui
 import {
     Card,
     CardContent,
@@ -11,25 +13,29 @@ import {
 } from "@/components/ui/card"
 import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button"
+
 //icons
 import { CiUser } from "react-icons/ci";
 
-
-//db
-import { db } from "@/lib/db";
-
-const ClientsList = async () => {
+//utils
+import { useRouter } from 'next/navigation'
 
 
-    // const GetClients = await getContactClient();
+interface interfaceProps {
 
-    const GetClients = await db.contact.findMany({
-        where: {
-            type: "Client",
-        },
-    });
+    GetClients: {
+        id: string,
+        name: string
+    }[]
+}
 
+const ClientsList = ({ GetClients }: interfaceProps) => {
 
+    const router = useRouter();
+    // Nextjs has a bug where dynamic server side routes don't work, so refreshing the page the first time you enter updates de information and solves the problem
+    useEffect(() => {
+        router.refresh();
+    }, []);
 
     return (
         <div className='flex flex-col space-y-8'>

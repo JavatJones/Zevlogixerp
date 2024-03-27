@@ -9,9 +9,25 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeftCircle } from 'lucide-react';
 import { getContactClient } from '@/data/contacts';
 
+//db
+import { db } from "@/lib/db";
+
+
 const ClientsPage = async () => {
 
-  const GetClients = await getContactClient();
+  // const GetClients = await getContactClient();
+
+  const GetClientsDb = await db.contact.findMany({
+    where: {
+      type: "Client",
+    },
+  });
+
+  const GetClients = GetClientsDb.map((item) => ({
+    id: item.id,
+    name: item.name,
+  }))
+
 
   return (
     <section className='flex flex-col space-y-8'>
@@ -27,7 +43,9 @@ const ClientsPage = async () => {
       </div>
 
       <section className=''>
-        <ClientsList></ClientsList>
+        <ClientsList
+          GetClients={GetClients}
+        ></ClientsList>
       </section>
 
     </section>
