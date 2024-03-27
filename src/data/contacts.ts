@@ -79,4 +79,21 @@ export const getAllAddressByID = async (id: string) => {
 }
 
 
+//Obtener una ubicacion por ID
+
+export const getAddressByID = async (id: string) => {
+    try {
+        const result = await db.address.findUnique({
+            where: {
+                id: id
+            }
+        })
+        return result;
+    } catch (error) {
+        console.error('Error al obtener clientes de contacto:', error);
+        throw error; // Lanzar el error para que sea manejado por el código que llame a esta función
+
+    }
+}
+
 //--- Loads

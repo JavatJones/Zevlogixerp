@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 
 
@@ -60,10 +61,20 @@ const DeleteAddressDialog: React.FC<getID> = (props) => {
     startTransition(() => {
       deleteAddress(values)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
-          router.refresh();
 
+          setSuccess(data.success)
+          setError(data.error)
+
+          if (data.error === undefined) {
+            router.refresh()
+          }
+
+          toast.success(data.success?.toString())
+          toast.error(data.error?.toString())
+
+        })
+        .catch((error) => {
+          console.log(error)
         })
     });
 
@@ -104,9 +115,6 @@ const DeleteAddressDialog: React.FC<getID> = (props) => {
 
               Esta acción no se puede deshacer. Esto borrará permanentemente la cuenta del sistema.
 
-              <FormError message={error}></FormError>
-              <FormSuccess message={success}></FormSuccess>
-
             </AlertDialogDescription>
 
             <AlertDialogFooter>
@@ -115,14 +123,14 @@ const DeleteAddressDialog: React.FC<getID> = (props) => {
                   Volver
                 </Button>
               </AlertDialogCancel>
-              <Button type='submit' disabled={isPending}>
+              <AlertDialogAction type='submit' disabled={isPending}>
 
                 {isPending ?
                   <p>Borrando...</p>
                   :
                   <p>Confirmar</p>
                 }
-              </Button>
+              </AlertDialogAction>
             </AlertDialogFooter>
           </form>
         </Form>

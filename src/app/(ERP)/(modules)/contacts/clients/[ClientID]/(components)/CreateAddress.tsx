@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -56,7 +57,7 @@ const CreateAddress: React.FC<ClientData> = (props) => {
         }
     });
 
-    //upload user to delete
+    //submit form
     const onSubmit = (values: z.infer<typeof CreateNewAddressClientSchema>) => {
         setError("");
         setSuccess("");
@@ -64,9 +65,20 @@ const CreateAddress: React.FC<ClientData> = (props) => {
         startTransition(() => {
             createAddress(values)
                 .then((data) => {
-                    setError(data.error);
-                    setSuccess(data.success);
-                    router.refresh();
+
+                    setSuccess(data.success)
+                    setError(data.error)
+
+                    if (data.error === undefined) {
+                        router.refresh()
+                    }
+
+                    toast.success(data.success?.toString())
+                    toast.error(data.error?.toString())
+
+                })
+                .catch((error) => {
+                    console.log(error)
                 })
         });
 
@@ -96,25 +108,6 @@ const CreateAddress: React.FC<ClientData> = (props) => {
                         <AlertDialogDescription className='flex flex-col space-y-5'>
 
                             <p>Esta acción no se puede deshacer. Esto editara los campos del sistema.</p>
-
-                            {/* dummy for id*/}
-                            <FormField
-                                control={form.control}
-                                name='id'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='hidden flex-col space-y-3 items-start'>
-                                            <FormLabel className='text-md'>
-                                                id contact
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='id' type='text' {...field} disabled></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
 
                             {/* Dirección*/}
                             <FormField
@@ -211,10 +204,6 @@ const CreateAddress: React.FC<ClientData> = (props) => {
                                 }}>
                             </FormField>
 
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
-
                         </AlertDialogDescription>
 
                         <AlertDialogFooter>
@@ -223,14 +212,14 @@ const CreateAddress: React.FC<ClientData> = (props) => {
                                     Volver
                                 </Button>
                             </AlertDialogCancel>
-                            <Button type='submit' disabled={isPending}>
+                            <AlertDialogAction type='submit' disabled={isPending}>
 
                                 {isPending ?
                                     <p>Actualizando...</p>
                                     :
                                     <p>Confirmar</p>
                                 }
-                            </Button>
+                            </AlertDialogAction>
                         </AlertDialogFooter>
                     </form>
                 </Form>
