@@ -7,26 +7,26 @@ import { Button } from '@/components/ui/button'
 
 //icons
 import { ChevronLeftCircle } from 'lucide-react';
-import { getContactClient } from '@/data/contacts';
 
 //db
 import { db } from "@/lib/db";
+import { getContactClient } from '@/data/contacts';
 
 
 const ClientsPage = async () => {
 
   // const GetClients = await getContactClient();
 
-  const GetClientsDb = await db.contact.findMany({
-    where: {
-      type: "Client",
-    },
-  });
+  // const GetClientsDb = await db.contact.findMany({
+  //   where: {
+  //     type: "Client",
+  //   },
+  // });
 
-  const GetClients = GetClientsDb.map((item) => ({
-    id: item.id,
-    name: item.name,
-  }))
+  // const GetClients = GetClientsDb.map((item) => ({
+  //   id: item.id,
+  //   name: item.name,
+  // }))
 
 
   return (
@@ -43,9 +43,7 @@ const ClientsPage = async () => {
       </div>
 
       <section className=''>
-        <ClientsList
-          GetClients={GetClients}
-        ></ClientsList>
+        <ClientsList/>
       </section>
 
     </section>

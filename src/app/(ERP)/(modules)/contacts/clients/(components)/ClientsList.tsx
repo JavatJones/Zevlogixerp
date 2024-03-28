@@ -18,23 +18,16 @@ import { CiUser } from "react-icons/ci";
 
 //utils
 import { useRouter } from 'next/navigation'
+import { db } from "@/lib/db";
+import { getContactClient } from '@/data/contacts';
 
 
-interface interfaceProps {
+const ClientsList = async () => {
 
-    GetClients: {
-        id: string,
-        name: string
-    }[]
-}
+    // const router = useRouter();
 
-const ClientsList = async ({ GetClients }: interfaceProps) => {
+    const GetClients = await getContactClient();
 
-    const router = useRouter();
-    // Nextjs has a bug where dynamic server side routes don't work, so refreshing the page the first time you enter updates de information and solves the problem
-    useEffect(() => {
-        router.refresh();
-    }, []);
 
     return (
         <div className='flex flex-col space-y-8'>
