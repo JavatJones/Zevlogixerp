@@ -1,5 +1,4 @@
-"use client"
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link'
 
 //ui
@@ -21,13 +20,12 @@ import { CiUser } from "react-icons/ci";
 import { useRouter } from 'next/navigation'
 import { db } from "@/lib/db";
 import { getContactClient } from '@/data/contacts';
-
+import GetListClients from '@/actions/contacts/clients/GetListClients'
 
 const ClientsList = async () => {
 
-    // const router = useRouter();
 
-    const GetClients = await getContactClient();
+    const GetClients = await GetListClients();
 
 
     return (
@@ -45,12 +43,12 @@ const ClientsList = async () => {
 
             </div>
 
-            {GetClients.length === 0 && (
+            {GetClients.clients.length === 0 && (
                 <p className='text-center'>No se han encontrado resultados</p>
             )}
 
             <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
-                {GetClients.map((client) => (
+                {GetClients.clients.map((client) => (
                     <Link key={client.id} href={`/contacts/clients/[clientId]`} as={`/contacts/clients/${client.id}`} passHref className='hover:scale-105 transition-all'>
                         <Card className='flex flex-row items-center justify-start p-3 gap-5 md:gap-10 drop-shadow-xl '>
 
