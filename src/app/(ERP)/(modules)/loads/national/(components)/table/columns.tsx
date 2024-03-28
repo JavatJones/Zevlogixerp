@@ -14,9 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import DeleteLoad from "../DeleteLoad";
-// import DeleteAddressDialog from "../DeleteAddressDialog";
-
-
 
 export type NationalSchema = {
     id: string,
@@ -26,7 +23,6 @@ export type NationalSchema = {
     shippingDetails: string,
     recollection: string,
 };
-
 
 export const columns: ColumnDef<NationalSchema>[] = [
 

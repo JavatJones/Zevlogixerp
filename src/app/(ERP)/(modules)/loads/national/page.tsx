@@ -24,37 +24,34 @@ export type NationalSchema = {
 
 const NationalLoadsPage = async () => {
 
-  // async function getData(): Promise<NationalSchema[]> {
-  //   // Fetch data from your API here.
-  //   const loads = await getAllLoads();
+  async function getData(): Promise<NationalSchema[]> {
+    // Fetch data from your API here.
+    const loads = await db.load.findMany({
+      where: {
+        loadType: "National",
+      },
+    });
 
-  //   return loads.map((dt: any) => ({
-  //     id: dt.id,
-  //     load: dt.load,
-  //     orderDate: dt.orderDate,
-  //     collectionDate: dt.collectionDate,
-  //     shippingDetails: dt.shippingDetails,
-  //     recollection: dt.recollection,
-  //   }));
-  // }
+    return loads.map((dt) => ({
+      id: dt.id!,
+      load: dt.load!,
+      orderDate: dt.orderDate!,
+      collectionDate: dt.collectionDate!,
+      shippingDetails: dt.shippingDetails!,
+      recollection: dt.recollection!,
+    }));
+  }
 
+  // const data = loads.map((dt) => ({
+  //   id: dt.id!,
+  //   load: dt.load!,
+  //   orderDate: dt.orderDate!,
+  //   collectionDate: dt.collectionDate!,
+  //   shippingDetails: dt.shippingDetails!,
+  //   recollection: dt.recollection!,
+  // }))
 
-  const loads = await db.load.findMany({
-    where: {
-      loadType: "National",
-    },
-  });
-
-  const data = loads.map((dt) => ({
-    id: dt.id!,
-    load: dt.load!,
-    orderDate: dt.orderDate!,
-    collectionDate: dt.collectionDate!,
-    shippingDetails: dt.shippingDetails!,
-    recollection: dt.recollection!,
-  }))
-
-  // const data = await getAllLoads();
+  const data = await getData();
 
   return (
     <section className='flex flex-col space-y-8'>
