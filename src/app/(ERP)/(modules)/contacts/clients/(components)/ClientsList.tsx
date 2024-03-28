@@ -1,4 +1,3 @@
-'use client'
 import React, { useEffect } from 'react';
 import Link from 'next/link'
 
@@ -29,7 +28,7 @@ interface interfaceProps {
     }[]
 }
 
-const ClientsList = ({ GetClients }: interfaceProps) => {
+const ClientsList = async ({ GetClients }: interfaceProps) => {
 
     const router = useRouter();
     // Nextjs has a bug where dynamic server side routes don't work, so refreshing the page the first time you enter updates de information and solves the problem
