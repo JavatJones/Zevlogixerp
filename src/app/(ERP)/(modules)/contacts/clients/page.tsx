@@ -13,7 +13,7 @@ import { db } from "@/lib/db";
 import { getContactClient } from '@/data/contacts';
 
 
-const ClientsPage = async () => {
+const ClientsPage = () => {
 
   // const GetClients = await getContactClient();
 
@@ -43,7 +43,7 @@ const ClientsPage = async () => {
       </div>
 
       <section className=''>
-        <ClientsList/>
+        <ClientsList />
       </section>
 
     </section>
