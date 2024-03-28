@@ -16,17 +16,19 @@ import Link from "next/link";
 import DeleteLoad from "../DeleteLoad";
 // import DeleteAddressDialog from "../DeleteAddressDialog";
 
-export type Schema = {
-    id: string
-    load: string
-    orderDate: Date
-    collectionDate: Date
-    shippingDetails: string
-    recollection: string
+
+
+export type NationalSchema = {
+    id: string,
+    load: string,
+    orderDate: Date,
+    collectionDate: Date,
+    shippingDetails: string,
+    recollection: string,
 };
 
 
-export const columns: ColumnDef<Schema>[] = [
+export const columns: ColumnDef<NationalSchema>[] = [
 
     // {
     //     accessorKey: "id",
@@ -96,7 +98,7 @@ export const columns: ColumnDef<Schema>[] = [
         cell: ({ row }) => {
             const data = row.original;
 
-        
+
             if (data.shippingDetails === null || data.shippingDetails.length <= 0) {
                 return (
                     <p>
@@ -118,7 +120,7 @@ export const columns: ColumnDef<Schema>[] = [
         cell: ({ row }) => {
             const data = row.original;
 
-        
+
             if (data.recollection === null || data.recollection.length <= 0) {
                 return (
                     <p>

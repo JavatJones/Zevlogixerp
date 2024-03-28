@@ -2,48 +2,59 @@ import React from 'react'
 import Link from 'next/link'
 //ui
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 
 import { DataTable } from "./(components)/table/data-table"
 import { getAllLoads } from '@/data/loads'
-import { Schema, columns } from './(components)/table/columns'
+import { columns } from './(components)/table/columns'
+import { db } from "@/lib/db";
 
 //icons
 import { ChevronLeftCircle } from 'lucide-react';
 
+export type NationalSchema = {
+  id: string,
+  load: string,
+  orderDate: Date,
+  collectionDate: Date,
+  shippingDetails: string,
+  recollection: string,
+};
 
 
 
 const NationalLoadsPage = async () => {
 
-  async function getData(): Promise<Schema[]> {
-    // Fetch data from your API here.
-    const loads = await getAllLoads();
+  // async function getData(): Promise<NationalSchema[]> {
+  //   // Fetch data from your API here.
+  //   const loads = await getAllLoads();
 
-    if (!loads) {
-      // Manejar el caso en que loads sea null
-      console.error('Error: No se pudo obtener la carga');
-      return [];
-    }
+  //   return loads.map((dt: any) => ({
+  //     id: dt.id,
+  //     load: dt.load,
+  //     orderDate: dt.orderDate,
+  //     collectionDate: dt.collectionDate,
+  //     shippingDetails: dt.shippingDetails,
+  //     recollection: dt.recollection,
+  //   }));
+  // }
 
-    return loads.map((dt: any) => ({
-      id: dt.id,
-      load: dt.load,
-      orderDate: dt.orderDate,
-      collectionDate: dt.collectionDate,
-      shippingDetails: dt.shippingDetails,
-      recollection: dt.recollection,
-    }));
-  }
 
-  const data = await getData();
+  const loads = await db.load.findMany({
+    where: {
+      loadType: "National",
+    },
+  });
+
+  const data = loads.map((dt) => ({
+    id: dt.id!,
+    load: dt.load!,
+    orderDate: dt.orderDate!,
+    collectionDate: dt.collectionDate!,
+    shippingDetails: dt.shippingDetails!,
+    recollection: dt.recollection!,
+  }))
+
+  // const data = await getAllLoads();
 
   return (
     <section className='flex flex-col space-y-8'>

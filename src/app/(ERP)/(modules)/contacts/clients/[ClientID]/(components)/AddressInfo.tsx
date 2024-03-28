@@ -17,11 +17,10 @@ import {
 import CreateAddress from './CreateAddress';
 import { columns } from './addressColumn/columns';
 import { DataTable } from './addressColumn/data-table';
-import { AddressInfoSchema } from './addressColumn/columns'
 import { getAllAddressByID } from '@/data/contacts'
 
 // This type is used to define the shape of our data.
-export type AddressSchema = {
+type AddressSchema = {
     id: string
     address: string
     codePostal: string
