@@ -12,6 +12,7 @@ import { ChevronLeftCircle } from 'lucide-react';
 import { db } from "@/lib/db";
 import { getContactClient } from '@/data/contacts';
 
+export const dynamic = 'force-dynamic'
 
 const ClientsPage = () => {
 
