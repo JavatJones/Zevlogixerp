@@ -24,16 +24,16 @@ import { getContactClient } from '@/data/contacts';
 
 const ClientsList = async () => {
 
-    const getListClients = async () => {
+    async function getListClients() {
 
         const clients = await getContactClient()
-    
+
         return clients
     }
-    
+
     const GetClients = await getListClients();
 
-    
+
 
     return (
         <div className='flex flex-col space-y-8'>
