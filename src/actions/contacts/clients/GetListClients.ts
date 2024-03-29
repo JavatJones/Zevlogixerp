@@ -12,7 +12,7 @@ const getListClients = async () => {
 
     const clients = await getContactClient()
 
-    return { clients }
+    return clients
 }
 
 export default getListClients

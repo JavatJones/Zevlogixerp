@@ -43,12 +43,12 @@ const ClientsList = async () => {
 
             </div>
 
-            {GetClients.clients.length === 0 && (
+            {GetClients.length === 0 && (
                 <p className='text-center'>No se han encontrado resultados</p>
             )}
 
             <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
-                {GetClients.clients.map((client) => (
+                {GetClients.map((client) => (
                     <Link key={client.id} href={`/contacts/clients/[clientId]`} as={`/contacts/clients/${client.id}`} passHref className='hover:scale-105 transition-all'>
                         <Card className='flex flex-row items-center justify-start p-3 gap-5 md:gap-10 drop-shadow-xl '>
 

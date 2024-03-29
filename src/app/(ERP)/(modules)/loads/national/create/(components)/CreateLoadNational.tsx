@@ -417,7 +417,7 @@ const CreateLoadNational = () => {
                                                             <Check
                                                                 className={cn(
                                                                     "mr-2 h-4 w-4",
-                                                                    client.name === field.value
+                                                                    client.id === field.value
                                                                         ? "opacity-100"
                                                                         : "opacity-0"
                                                                 )}
@@ -631,7 +631,7 @@ const CreateLoadNational = () => {
                                                                 <Check
                                                                     className={cn(
                                                                         "mr-2 h-4 w-4",
-                                                                        state.value === field.value ? "opacity-100" : "opacity-0"
+                                                                        state.label === field.value ? "opacity-100" : "opacity-0"
                                                                     )}
                                                                 />
                                                                 {state.label}
