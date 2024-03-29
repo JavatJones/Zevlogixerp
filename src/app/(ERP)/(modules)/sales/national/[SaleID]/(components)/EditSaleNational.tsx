@@ -36,6 +36,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Switch } from '@/components/ui/switch'
 import { Separator } from "@/components/ui/separator"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -93,10 +94,19 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
-                });
+
+                    if (data.error === undefined) {
+                        router.refresh();
+                    }
+
+                    toast.success(data.success?.toString());
+                    toast.error(data.error?.toString());
+
+                }).catch((error) => {
+                    console.log(error)
+                })
         });
 
-        router.refresh();
     }
 
     return (
@@ -284,9 +294,7 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
                         </CardContent>
                         <CardFooter className='flex flex-col gap-5'>
 
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
-
+                           
                         </CardFooter>
                     </Card>
                 </div>

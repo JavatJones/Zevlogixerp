@@ -48,6 +48,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Switch } from '@/components/ui/switch'
 import { Separator } from "@/components/ui/separator"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -131,6 +132,17 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
         .then((data) => {
           setError(data.error);
           setSuccess(data.success);
+
+          if (data.error === undefined) {
+            router.refresh();
+          }
+
+          toast.success(data.success?.toString());
+          toast.error(data.error?.toString());
+
+
+        }).catch((error) => {
+          console.log(error)
         });
     });
 
@@ -155,7 +167,7 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
         <DialogHeader>
           <DialogTitle>Agregar proveedor al embarque</DialogTitle>
           <DialogDescription>
-            DESC
+            Description
           </DialogDescription>
         </DialogHeader>
 
@@ -164,7 +176,7 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
             <div className='flex flex-col space-y-5'>
 
               {/* ID */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='loadId'
                 render={({ field }) => {
@@ -178,7 +190,7 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
               {/* provider */}
               <FormField
@@ -251,7 +263,7 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
                 render={({ field }) => {
                   return <FormItem>
                     <FormLabel className='text-md'>
-                      Costo
+                      Costo (MXN)
                     </FormLabel>
                     <FormControl>
                       <Input placeholder='Costo del proveedor' type='number' {...field} disabled={isPending}></Input>
@@ -262,26 +274,23 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
               </FormField>
 
             </div>
-
-            <FormError message={error}></FormError>
-            <FormSuccess message={success}></FormSuccess>
-
+            
             <DialogFooter>
               <DialogClose asChild>
                 <Button onClick={onClearForm} variant={'outline'} disabled={isPending}>
                   Volver
                 </Button>
               </DialogClose>
+            
+                <Button variant={'default'} type='submit' disabled={isPending}>
 
-              <Button variant={'default'} type='submit' disabled={isPending}>
-
-                {isPending ?
-                  <p>Guardando...</p>
-                  :
-                  <p>Guardar</p>
-                }
-              </Button>
-
+                  {isPending ?
+                    <p>Guardando...</p>
+                    :
+                    <p>Guardar</p>
+                  }
+                </Button>
+          
             </DialogFooter>
 
           </form>

@@ -37,6 +37,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Switch } from '@/components/ui/switch'
 import { Separator } from "@/components/ui/separator"
+import { toast } from 'react-toastify';
 
 //validation
 import * as z from "zod";
@@ -239,7 +240,19 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
-                });
+
+                    if (data.error === undefined) {
+                        router.refresh();
+                    }
+
+                    toast.success(data.success?.toString())
+                    toast.error(data.error?.toString())
+
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         });
 
         router.refresh();
@@ -356,7 +369,7 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                                                                         <Check
                                                                             className={cn(
                                                                                 "mr-2 h-4 w-4",
-                                                                                client.name === field.value
+                                                                                client.id === field.value
                                                                                     ? "opacity-100"
                                                                                     : "opacity-0"
                                                                             )}

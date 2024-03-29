@@ -23,7 +23,7 @@ import CreateProvider from "../../../(components)/providers/CreateProvider"
 const FeesProviders: React.FC<FeesData> = async (props) => {
 
     async function getData(): Promise<Schema[]> {
-        // Fetch data from your API here.
+        // Fetch data
         const loads = await getAllFeesByID(props.id);
 
         return loads.map((dt: any) => ({
@@ -36,21 +36,27 @@ const FeesProviders: React.FC<FeesData> = async (props) => {
     const data = await getData();
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle className='flex flex-row justify-between items-center'>
-                    Proveedores
-                 
-                    <CreateProvider id={props.id}></CreateProvider>
-                </CardTitle>
-                <CardDescription>
-                    Asignar proveedores a este embarque
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <DataTable data={data} columns={columns}></DataTable>
-            </CardContent>
-        </Card>
+        <div className='flex flex-col space-y-5'>
+            <div className='flex flex-row justify-end'>
+                <CreateProvider id={props.id}></CreateProvider>
+            </div>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle className='flex flex-row justify-between items-center'>
+                        Proveedores
+
+
+                    </CardTitle>
+                    <CardDescription>
+                        Asignar proveedores a este embarque
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <DataTable data={data} columns={columns}></DataTable>
+                </CardContent>
+            </Card>
+        </div>
     )
 }
 
