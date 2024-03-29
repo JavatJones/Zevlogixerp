@@ -20,13 +20,20 @@ import { CiUser } from "react-icons/ci";
 import { useRouter } from 'next/navigation'
 import { db } from "@/lib/db";
 import { getContactClient } from '@/data/contacts';
-import GetListClients from '@/actions/contacts/clients/GetListClients'
+// import GetListClients from '@/actions/contacts/clients/GetListClients'
 
 const ClientsList = async () => {
 
+    const getListClients = async () => {
 
-    const GetClients = await GetListClients();
+        const clients = await getContactClient()
+    
+        return clients
+    }
+    
+    const GetClients = await getListClients();
 
+    
 
     return (
         <div className='flex flex-col space-y-8'>
