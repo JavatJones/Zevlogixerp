@@ -26,9 +26,14 @@ const ClientsList = async () => {
 
     async function getListClients() {
 
-        const clients = await getContactClient()
+        const contactClient = await db.contact.findMany({
+            where: {
+                type: "Client",
+            },
+        }
+        );
 
-        return clients
+        return contactClient
     }
 
     const GetClients = await getListClients();
