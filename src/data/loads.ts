@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 
 
 //Get all loads national
-export const getAllLoads = async () => {
+export const getAllNationalLoads = async () => {
     try {
         const data = await db.load.findMany({
             where: {

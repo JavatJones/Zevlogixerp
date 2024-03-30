@@ -7,12 +7,12 @@ import { ChevronLeftCircle } from 'lucide-react';
 
 //components
 import { Schema, columns } from './(components)/table/columns'
-import { getAllLoads } from '@/data/loads'
+import { getAllNationalLoads } from '@/data/loads'
 import { DataTable } from './(components)/table/data-table'
 
 async function getData(): Promise<Schema[]> {
     // Fetch data from your API here.
-    const loads = await getAllLoads();
+    const loads = await getAllNationalLoads();
 
     if (!loads) {
         // Manejar el caso en que loads sea null

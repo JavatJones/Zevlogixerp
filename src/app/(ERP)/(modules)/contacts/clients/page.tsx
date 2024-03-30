@@ -16,20 +16,6 @@ export const dynamic = 'force-dynamic'
 
 const ClientsPage = () => {
 
-  // const GetClients = await getContactClient();
-
-  // const GetClientsDb = await db.contact.findMany({
-  //   where: {
-  //     type: "Client",
-  //   },
-  // });
-
-  // const GetClients = GetClientsDb.map((item) => ({
-  //   id: item.id,
-  //   name: item.name,
-  // }))
-
-
   return (
     <section className='flex flex-col space-y-8'>
       <div className='flex flex-row items-center space-x-4'>

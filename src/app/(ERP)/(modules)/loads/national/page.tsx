@@ -4,9 +4,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 import { DataTable } from "./(components)/table/data-table"
-import { getAllLoads } from '@/data/loads'
+import { getAllNationalLoads } from '@/data/loads'
 import { columns } from './(components)/table/columns'
-import { db } from "@/lib/db";
 
 //icons
 import { ChevronLeftCircle } from 'lucide-react';
@@ -20,21 +19,23 @@ export type NationalSchema = {
   recollection: string,
 };
 
+export const dynamic = 'force-dynamic'
 
 
 const NationalLoadsPage = async () => {
 
   async function getData(): Promise<NationalSchema[]> {
     // Fetch data from your API here.
-    const loads = await db.load.findMany({
-      where: {
-        loadType: "National",
-      },
-    });
+    const loads = await getAllNationalLoads()
 
+    if (!loads) {
+      // Manejar el caso en que loads sea null
+      console.error('Error: No se pudo obtener la carga');
+      return [];
+    }
     return loads.map((dt) => ({
-      id: dt.id!,
-      load: dt.load!,
+      id: dt.id,
+      load: dt.load,
       orderDate: dt.orderDate!,
       collectionDate: dt.collectionDate!,
       shippingDetails: dt.shippingDetails!,

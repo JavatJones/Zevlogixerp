@@ -17,28 +17,11 @@ import { Button } from "@/components/ui/button"
 import { CiUser } from "react-icons/ci";
 
 //utils
-import { useRouter } from 'next/navigation'
-import { db } from "@/lib/db";
 import { getContactClient } from '@/data/contacts';
-// import GetListClients from '@/actions/contacts/clients/GetListClients'
 
 const ClientsList = async () => {
 
-    async function getListClients() {
-
-        const contactClient = await db.contact.findMany({
-            where: {
-                type: "Client",
-            },
-        }
-        );
-
-        return contactClient
-    }
-
-    const GetClients = await getListClients();
-
-
+    const GetClients = await getContactClient();
 
     return (
         <div className='flex flex-col space-y-8'>
