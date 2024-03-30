@@ -34,8 +34,8 @@ const Drawler = () => {
             </DrawerTrigger>
             <DrawerContent className='mx-auto w-full max-w-md flex flex-col h-4/5'>
 
-                <DrawerHeader className='border-b-1 border-gray-50'>
-                    <DrawerTitle className='flex flex-row justify-around items-center'>
+                <DrawerHeader className='border-b-1p-2'>
+                    <DrawerTitle className='flex flex-row justify-around items-center '>
                         <ToggleTheme></ToggleTheme>
 
                         <p>Menú</p>
