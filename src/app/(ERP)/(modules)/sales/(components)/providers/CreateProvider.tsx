@@ -116,7 +116,7 @@ const CreateProvider: React.FC<getIDLoad> = (props) => {
     defaultValues: {
 
       loadId: props.id,
-      cost: 0,
+
       provider: "",
 
     }

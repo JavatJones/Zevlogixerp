@@ -157,6 +157,11 @@ export const CreateFeeSchema = z.object({
 
     loadId: z.string(),
     provider: z.string().min(1, "Selecciona un cliente"),
-    cost: z.coerce.number().nonnegative("No puede ser negativo")
+    cost: z.coerce.number().nonnegative("No puede ser negativo").default(0)
 
+});
+
+//delete schema provider
+export const DeleteProviderSchema = z.object({
+    id: z.string(),
 });

@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import getProviders from "@/actions/sales/getProvidersById";
 import ProviderRow from "./ProviderRow";
+import DeleteProvider from "../DeleteProvider";
 
 
 export type Schema = {
@@ -142,19 +143,9 @@ export const columns: ColumnDef<Schema>[] = [
                             asChild
 
                         >
-                            <Button
-
-                                variant={"default"}
-                            >
-                                Borrar
-                            </Button>
+                            <DeleteProvider id={data.id}></DeleteProvider>
                         </DropdownMenuItem>
 
-                        {/* <DropdownMenuItem
-                            asChild
-                        >
-                            <DeleteLoad id={data.id}></DeleteLoad>
-                        </DropdownMenuItem> */}
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
