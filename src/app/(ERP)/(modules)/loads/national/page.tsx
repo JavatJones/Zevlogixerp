@@ -43,15 +43,6 @@ const NationalLoadsPage = async () => {
     }));
   }
 
-  // const data = loads.map((dt) => ({
-  //   id: dt.id!,
-  //   load: dt.load!,
-  //   orderDate: dt.orderDate!,
-  //   collectionDate: dt.collectionDate!,
-  //   shippingDetails: dt.shippingDetails!,
-  //   recollection: dt.recollection!,
-  // }))
-
   const data = await getData();
 
   return (

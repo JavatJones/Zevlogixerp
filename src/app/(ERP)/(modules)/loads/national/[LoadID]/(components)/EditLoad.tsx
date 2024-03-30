@@ -286,8 +286,6 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                         <CardHeader>
                             <CardTitle className='flex flex-row items-center'>
 
-
-                                {/* Load  ={isPending} */}
                                 <FormField
                                     control={form.control}
                                     name='load'
@@ -810,13 +808,7 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                         </CardContent>
                         <CardFooter className='flex flex-col gap-5'>
-                            <p>Card Footer</p>
-
-                            <Separator></Separator>
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
-
+                            
                         </CardFooter>
                     </Card>
                 </div>

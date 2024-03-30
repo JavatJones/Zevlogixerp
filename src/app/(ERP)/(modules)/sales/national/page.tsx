@@ -10,6 +10,8 @@ import { Schema, columns } from './(components)/table/columns'
 import { getAllNationalLoads } from '@/data/loads'
 import { DataTable } from './(components)/table/data-table'
 
+export const dynamic = 'force-dynamic'
+
 async function getData(): Promise<Schema[]> {
     // Fetch data from your API here.
     const loads = await getAllNationalLoads();
