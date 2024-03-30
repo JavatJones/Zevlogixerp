@@ -34,16 +34,17 @@ const Drawler = () => {
             </DrawerTrigger>
             <DrawerContent className='mx-auto w-full max-w-md flex flex-col h-4/5'>
 
-                <DrawerHeader className='border-b-2'>
+                <DrawerHeader className='border-b-1 border-gray-50'>
                     <DrawerTitle className='flex flex-row justify-around items-center'>
                         <ToggleTheme></ToggleTheme>
 
-                        <big>Menú</big>
+                        <p>Menú</p>
                         
                         <DropdownMenuNavBar></DropdownMenuNavBar>
                     </DrawerTitle>
                 </DrawerHeader>
-                <div className="flex flex-col gap-3 p-5 h-6/6 overflow-y-auto">
+
+                <div className="flex flex-col gap-3 p-2 h-6/6 overflow-y-auto">
                     
                     <p>Contenido</p>
                     <p>Contenido</p>
