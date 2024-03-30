@@ -129,7 +129,6 @@ export const columns: ColumnDef<Schema>[] = [
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Abrir menu</span>
                             <GiSettingsKnobs size={30} />
                         </Button>
                     </DropdownMenuTrigger>

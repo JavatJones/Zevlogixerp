@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 //icons
 import { ChevronLeftCircle } from 'lucide-react';
 
+export const dynamic = 'force-dynamic'
+
 
 async function getData(): Promise<UserInfoSchema[]> {
   // Fetch data from your API here.

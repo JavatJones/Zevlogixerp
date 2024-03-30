@@ -202,7 +202,7 @@ export const columns: ColumnDef<Schema>[] = [
                         >
                             <Button
                                 asChild
-                                variant={"Transparent"}
+                                variant={"default"}
                             >
                                 <Link href={`/sales/national/${data.id}`}>
                                     Ver detalles
