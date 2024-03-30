@@ -264,24 +264,6 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                 <div className='flex flex-col space-y-5'>
 
-                    <div className='flex flex-row justify-end'>
-                        <div className='flex flex-row space-x-4'>
-                            <Button asChild className='w-full hidden' variant={'ghost'} disabled={isPending}>
-                                <Link href={"/loads/national"}>
-                                    <p>Volver</p>
-                                </Link>
-                            </Button>
-                            <Button className='w-full' type='submit' disabled={isPending}>
-
-                                {isPending ?
-                                    <p>Guardando...</p>
-                                    :
-                                    <p>Guardar cambios</p>
-                                }
-                            </Button>
-                        </div>
-                    </div>
-
                     <Card className='flex flex-col w-full'>
                         <CardHeader>
                             <CardTitle className='flex flex-row items-center'>
@@ -309,14 +291,32 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                                 </FormField>
                             </CardTitle>
                             <CardDescription>id: {props.id}</CardDescription>
+
+                            <div className='flex flex-row justify-end'>
+                                <div className='flex flex-row space-x-4'>
+                                    <Button asChild className='w-full hidden' variant={'ghost'} disabled={isPending}>
+                                        <Link href={"/loads/national"}>
+                                            <p>Volver</p>
+                                        </Link>
+                                    </Button>
+                                    <Button className='w-full' type='submit' disabled={isPending}>
+
+                                        {isPending ?
+                                            <p>Guardando...</p>
+                                            :
+                                            <p>Guardar Cambios</p>
+                                        }
+                                    </Button>
+                                </div>
+                            </div>
                         </CardHeader>
                         <CardContent className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
 
 
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
-                                    <CardTitle>Cliente</CardTitle>
-                                    <CardDescription>Asigna un cliente</CardDescription>
+                                    <CardTitle className='font-bold text-center text-3xl'>Cliente</CardTitle>
+                                    <CardDescription className='text-center'>Asigna un cliente</CardDescription>
                                 </CardHeader>
                                 <CardContent>
 
@@ -388,8 +388,8 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
-                                    <CardTitle>Fechas</CardTitle>
-                                    <CardDescription>Registrar detalles de fechas</CardDescription>
+                                    <CardTitle className='font-bold text-center text-3xl'>Fechas</CardTitle>
+                                    <CardDescription className='text-center'>Registrar detalles de fechas</CardDescription>
                                 </CardHeader>
                                 <CardContent className='flex flex-col space-y-6'>
                                     {/* orderDate */}
@@ -490,8 +490,8 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
-                                    <CardTitle>Detalles del embarque</CardTitle>
-                                    <CardDescription>Especificaciones del envío</CardDescription>
+                                    <CardTitle className='font-bold text-center text-3xl'>Detalles del embarque</CardTitle>
+                                    <CardDescription className='text-center'>Especificaciones del envío</CardDescription>
                                 </CardHeader>
                                 <CardContent className='flex flex-col space-y-6'>
                                     {/* shippingDetails */}
@@ -532,8 +532,8 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
-                                    <CardTitle>Origen del embarque</CardTitle>
-                                    <CardDescription>¿Cual es el origen del embarque?</CardDescription>
+                                    <CardTitle className='font-bold text-center text-3xl'>Origen del embarque</CardTitle>
+                                    <CardDescription className='text-center'>¿Cual es el origen del embarque?</CardDescription>
                                 </CardHeader>
                                 <CardContent className='flex flex-col space-y-6'>
 
@@ -670,8 +670,8 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
 
                             <Card className='flex flex-col w-full max-w-xl'>
                                 <CardHeader>
-                                    <CardTitle>Destino del embarque</CardTitle>
-                                    <CardDescription>¿Cual es el destino del embarque?</CardDescription>
+                                    <CardTitle className='font-bold text-center text-3xl'>Destino del embarque</CardTitle>
+                                    <CardDescription className='text-center'>¿Cual es el destino del embarque?</CardDescription>
                                 </CardHeader>
                                 <CardContent className='flex flex-col space-y-6'>
 
@@ -807,9 +807,7 @@ const EditLoad: React.FC<LoadInformationPageEdit> = (props) => {
                             </Card>
 
                         </CardContent>
-                        <CardFooter className='flex flex-col gap-5'>
-                            
-                        </CardFooter>
+
                     </Card>
                 </div>
             </form>

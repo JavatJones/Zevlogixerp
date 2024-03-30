@@ -25,16 +25,20 @@ const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Update user
-    await db.user.update({
-        where: {
-            id,
-        },
-        data: {
-            password: hashedPassword,
-        },
-    });
+    try {
+        await db.user.update({
+            where: {
+                id,
+            },
+            data: {
+                password: hashedPassword,
+            },
+        });
+    } catch (error) {
+        return { error: "¡Algo ha salido mal!" }
+    }
 
-    return { success: `La contraseña se ha cambiado correctamente!` }
+    return { success: `La contraseña se ha actualizado!` }
 }
 
 export default resetPassword

@@ -28,6 +28,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { FormError } from '@/components/forms/form-error'
 import { FormSuccess } from '@/components/forms/form-success'
+import { toast } from 'react-toastify'
 
 
 const RegisterForm = () => {
@@ -60,6 +61,17 @@ const RegisterForm = () => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
+
+                    if (data.error === undefined) {
+                        router.refresh();
+                        router.push('/settings/users');
+                        router.refresh();
+                    }
+                    toast.success(data.success)
+                    toast.error(data.error)
+
+                }).catch((error) => {
+                    console.log(error)
                 })
         });
         router.refresh();
@@ -244,9 +256,6 @@ const RegisterForm = () => {
                                     </FormItem>
                                 }}>
                             </FormField>
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
 
                         </div>
 

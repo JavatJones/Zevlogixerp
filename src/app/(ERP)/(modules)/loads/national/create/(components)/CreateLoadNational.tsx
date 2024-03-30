@@ -236,531 +236,562 @@ const CreateLoadNational = () => {
 
 
     return (
-        <Card className='flex flex-col w-full max-w-xl'>
+        <Card className='flex flex-col w-full'>
             <CardHeader>
-                <CardTitle className='font-bold text-center text-3xl'>Crear nuevo load</CardTitle>
-                <CardDescription className='text-center'>Asigna un identificador a este load</CardDescription>
+                <CardTitle className='font-bold text-center text-3xl'>Crear nuevo embarque nacional</CardTitle>
+                {/* <CardDescription className='text-center'>lorem</CardDescription> */}
             </CardHeader>
-            <CardContent >
+            <CardContent>
 
                 <Form {...form}>
-                    <form id='thisFrom' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-6'>
+                    <form id='thisFrom' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
 
-                        {/* Load */}
-                        <FormField
-                            control={form.control}
-                            name='load'
-                            render={({ field }) => {
-                                return <FormItem>
-                                    <FormLabel className='text-md'>
-                                        Load
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input placeholder='Identificador de Load' type='text' {...field} disabled={isPending}></Input>
-                                    </FormControl>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
+                        <div className='flex justify-end'>
+                            <div className='flex flex-row space-x-3'>
 
-                        <Separator></Separator>
+                                <Button asChild className='w-full' variant={'ghost'} disabled={isPending}>
+                                    <Link href={"/loads/national"}>
+                                        <p>Cancelar</p>
+                                    </Link>
+                                </Button>
+                                <Button className='w-full' type='submit' onClick={form.handleSubmit(onSubmit)} disabled={isPending}>
 
-                        <CardHeader>
-                            <CardTitle className='font-bold text-center text-3xl'>Fechas</CardTitle>
-                            <CardDescription className='text-center'>Registrar nuevo load en el sistema</CardDescription>
-                        </CardHeader>
+                                    {isPending ?
+                                        <p>Creando...</p>
+                                        :
+                                        <p>Crear embarque</p>
+                                    }
+                                </Button>
 
-                        {/* orderDate */}
-                        <FormField
-                            control={form.control}
-                            name='orderDate'
-                            render={({ field }) => {
-                                return <FormItem className='flex flex-col'>
-                                    <FormLabel className='text-md'>
-                                        Fecha de pedido
-                                    </FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    disabled={isPending}
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "w-full pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Elige una fecha</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                selected={field.value}
-                                                onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    // date > new Date() || 
-                                                    date < new Date("1900-01-01")
-                                                }
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
+                            </div>
+                        </div>
 
-                        {/* collectionDate */}
-                        <FormField
-                            control={form.control}
-                            name='collectionDate'
-                            render={({ field }) => {
-                                return <FormItem className='flex flex-col'>
-                                    <FormLabel className='text-md'>
-                                        Fecha recolección
-                                    </FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    disabled={isPending}
-                                                    variant={"outline"}
-                                                    className={cn(
-                                                        "w-full pl-3 text-left font-normal",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value ? (
-                                                        format(field.value, "PPP")
-                                                    ) : (
-                                                        <span>Elige una fecha</span>
-                                                    )}
-                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                                mode="single"
-                                                selected={field.value}
-                                                onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    // date > new Date() || 
-                                                    date < new Date("1900-01-01")
-                                                }
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
+                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
+                            {/* Load */}
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Embarque</CardTitle>
+                                    <CardDescription className='text-center'>Ingresa el ID del embarque</CardDescription>
+                                </CardHeader>
+                                <CardContent className='flex flex-col space-y-5'>
+                                    <FormField
+                                        control={form.control}
+                                        name='load'
+                                        render={({ field }) => {
+                                            return <FormItem>
+                                                <FormLabel className='text-md'>
+                                                    Identificador de Load
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='ID' type='text' {...field} disabled={isPending}></Input>
+                                                </FormControl>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+                                </CardContent>
+                            </Card>
 
-                        <Separator></Separator>
-                        <CardHeader>
-                            <CardTitle className='font-bold text-center text-3xl'>Cliente</CardTitle>
-                            <CardDescription className='text-center'>Asigna un cliente</CardDescription>
-                        </CardHeader>
-
-                        {/* nameClient */}
-                        <FormField
-                            control={form.control}
-                            name='nameClient'
-                            render={({ field }) => {
-                                return <FormItem className='flex flex-col'>
-                                    <FormLabel className='text-md'>
-                                        Cliente
-                                    </FormLabel>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                                <Button
-                                                    variant="outline"
-                                                    role="combobox"
-                                                    className={cn(
-                                                        "w-full justify-between",
-                                                        !field.value && "text-muted-foreground"
-                                                    )}
-                                                >
-                                                    {field.value
-                                                        ? clientName.find(
-                                                            (client) => client.id === field.value
-                                                        )?.name
-                                                        : "Seleccionar cliente"}
-                                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-[250px] h-96 p-2">
-                                            <Command>
-                                                <CommandInput placeholder="Buscar clientes..." />
-                                                <CommandEmpty>Cliente no encontrado.</CommandEmpty>
-                                                <CommandGroup className='flex overflow-auto'>
-                                                    {clientName.map((client) => (
-                                                        <CommandItem
-                                                            disabled={isPending}
-                                                            className='cursor-pointer'
-                                                            value={client.name}
-                                                            key={client.id}
-                                                            onSelect={() => {
-                                                                form.setValue("nameClient", client.id)
-                                                            }}
-                                                        >
-                                                            <Check
+                            {/* cliente */}
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Cliente</CardTitle>
+                                    <CardDescription className='text-center'>Asigna un cliente</CardDescription>
+                                </CardHeader>
+                                <CardContent className='flex flex-col space-y-5'>
+                                    <FormField
+                                        control={form.control}
+                                        name='nameClient'
+                                        render={({ field }) => {
+                                            return <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>
+                                                    Cliente
+                                                </FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
                                                                 className={cn(
-                                                                    "mr-2 h-4 w-4",
-                                                                    client.id === field.value
-                                                                        ? "opacity-100"
-                                                                        : "opacity-0"
+                                                                    "w-full justify-between",
+                                                                    !field.value && "text-muted-foreground"
                                                                 )}
-                                                            />
-                                                            {client.name}
-                                                        </CommandItem>
-                                                    ))}
-                                                </CommandGroup>
-                                            </Command>
-                                        </PopoverContent>
-                                    </Popover>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
-
-                        <Separator></Separator>
-
-                        <div className='flex flex-col space-y-6'>
-                            <CardHeader>
-                                <CardTitle className='font-bold text-center text-3xl'>Ubicaciones</CardTitle>
-                                <CardDescription className='text-center'>Origen</CardDescription>
-                            </CardHeader>
-                            {/* OriginCountry */}
-                            <FormField
-                                control={form.control}
-                                name='originCountry'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <FormLabel className='text-md'>
-                                            País
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input placeholder='País' type='text' {...field} disabled></Input>
-                                        </FormControl>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
-
-                            {/* originState */}
-                            <FormField
-                                control={form.control}
-                                name='originState'
-                                render={({ field }) => (
-                                    <FormItem className='flex flex-col'>
-                                        <FormLabel className='text-md'>Estado</FormLabel>
-                                        <Popover>
-                                            <PopoverTrigger asChild>
-                                                <FormControl>
-                                                    <Button
-                                                        variant="outline"
-                                                        role="combobox"
-                                                        className="w-full justify-between"
-                                                        disabled={isPending}
-                                                    >
-                                                        {field.value ? originStates.find((item) => item.label === field.value)?.label : "Seleccionar estado"}
-                                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                    </Button>
-                                                </FormControl>
-                                            </PopoverTrigger>
-                                            <PopoverContent className="w-[250px] h-96 p-2">
-                                                <Command>
-                                                    <CommandInput placeholder="Buscar ubicaciones..." />
-                                                    <CommandEmpty>Sin resultados.</CommandEmpty>
-                                                    <CommandGroup className='flex overflow-auto'>
-                                                        {originStates.map((state) => (
-                                                            <CommandItem
-                                                                disabled={isPending}
-                                                                className='cursor-pointer'
-                                                                value={state.label}
-                                                                key={state.value}
-                                                                onSelect={() => {
-                                                                    setSelectedOriginState(state.value);
-                                                                    form.setValue("originState", state.label);
-                                                                    loadCities(selectedOriginCountry, state.value, 'origin');
-                                                                    handleStateChange(state.value, 'origin');
-                                                                }}
                                                             >
-                                                                <Check
-                                                                    className={cn(
-                                                                        "mr-2 h-4 w-4",
-                                                                        state.label === field.value ? "opacity-100" : "opacity-0"
-                                                                    )}
-                                                                />
-                                                                {state.label}
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </Command>
-                                            </PopoverContent>
-                                        </Popover>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                )}
-                            />
+                                                                {field.value
+                                                                    ? clientName.find(
+                                                                        (client) => client.id === field.value
+                                                                    )?.name
+                                                                    : "Seleccionar cliente"}
+                                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-[250px] h-96 p-2">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar clientes..." />
+                                                            <CommandEmpty>Cliente no encontrado.</CommandEmpty>
+                                                            <CommandGroup className='flex overflow-auto'>
+                                                                {clientName.map((client) => (
+                                                                    <CommandItem
+                                                                        disabled={isPending}
+                                                                        className='cursor-pointer'
+                                                                        value={client.name}
+                                                                        key={client.id}
+                                                                        onSelect={() => {
+                                                                            form.setValue("nameClient", client.id)
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                client.id === field.value
+                                                                                    ? "opacity-100"
+                                                                                    : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {client.name}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+                                </CardContent>
+                            </Card>
 
-                            {/* originCity */}
-                            <FormField
-                                control={form.control}
-                                name='originCity'
-                                render={({ field }) => (
-                                    <FormItem className='flex flex-col'>
-                                        <FormLabel className='text-md'>Ciudad</FormLabel>
-                                        <Popover>
-                                            <PopoverTrigger asChild>
-                                                <FormControl>
-                                                    <Button
-                                                        variant="outline"
-                                                        role="combobox"
-                                                        className="w-full justify-between"
-                                                    >
-                                                        {field.value ? originCities.find((item) => item.value === field.value)?.value : "Seleccionar ciudad"}
-                                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                    </Button>
-                                                </FormControl>
-                                            </PopoverTrigger>
-                                            <PopoverContent className="w-[250px] h-96 p-2">
-                                                <Command>
-                                                    <CommandInput placeholder="Buscar ubicaciones..." />
-                                                    <CommandEmpty>Sin resultados.</CommandEmpty>
-                                                    <CommandGroup className='flex overflow-auto'>
-                                                        {originCities.map((city) => (
-                                                            <CommandItem
+                            {/* Dates */}
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Fechas</CardTitle>
+                                    <CardDescription className='text-center'>Registrar nuevo load en el sistema</CardDescription>
+                                </CardHeader>
+                                <CardContent className='flex flex-col space-y-5'>
+                                    {/* orderDate */}
+                                    <FormField
+                                        control={form.control}
+                                        name='orderDate'
+                                        render={({ field }) => {
+                                            return <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>
+                                                    Fecha de pedido
+                                                </FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
                                                                 disabled={isPending}
-                                                                className='cursor-pointer'
-                                                                value={city.value}
-                                                                key={city.value}
-                                                                onSelect={() => {
-                                                                    setSelectedOriginCity(city.value);
-                                                                    form.setValue("originCity", city.label);
-                                                                }}
+                                                                variant={"outline"}
+                                                                className={cn(
+                                                                    "w-full pl-3 text-left font-normal",
+                                                                    !field.value && "text-muted-foreground"
+                                                                )}
                                                             >
-                                                                <Check
-                                                                    className={cn(
-                                                                        "mr-2 h-4 w-4",
-                                                                        city.value === field.value ? "opacity-100" : "opacity-0"
-                                                                    )}
-                                                                />
-                                                                {city.label}
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </Command>
-                                            </PopoverContent>
-                                        </Popover>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                )}
-                            />
-                            <CardHeader>
+                                                                {field.value ? (
+                                                                    format(field.value, "PPP")
+                                                                ) : (
+                                                                    <span>Elige una fecha</span>
+                                                                )}
+                                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-auto p-0" align="start">
+                                                        <Calendar
+                                                            mode="single"
+                                                            selected={field.value}
+                                                            onSelect={field.onChange}
+                                                            disabled={(date) =>
+                                                                // date > new Date() || 
+                                                                date < new Date("1900-01-01")
+                                                            }
+                                                            initialFocus
+                                                        />
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
 
-                                <CardDescription className='text-center'>Destino</CardDescription>
-                            </CardHeader>
-
-                            {/* destinyCountry */}
-                            <FormField
-                                control={form.control}
-                                name='destinyCountry'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <FormLabel className='text-md'>
-                                            País
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input placeholder='País' type='text' {...field} disabled></Input>
-                                        </FormControl>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
-
-                            {/* destinyState */}
-                            <FormField
-                                control={form.control}
-                                name='destinyState'
-                                render={({ field }) => (
-                                    <FormItem className='flex flex-col'>
-                                        <FormLabel className='text-md'>Estado</FormLabel>
-                                        <Popover>
-                                            <PopoverTrigger asChild>
-                                                <FormControl>
-                                                    <Button
-                                                        variant="outline"
-                                                        role="combobox"
-                                                        className="w-full justify-between"
-                                                    >
-                                                        {field.value ? destinationStates.find((item) => item.label === field.value)?.label : "Seleccionar estado"}
-                                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                    </Button>
-                                                </FormControl>
-                                            </PopoverTrigger>
-                                            <PopoverContent className="w-[250px] h-96 p-2">
-                                                <Command>
-                                                    <CommandInput placeholder="Buscar ubicaciones..." />
-                                                    <CommandEmpty>Sin resultados.</CommandEmpty>
-                                                    <CommandGroup className='flex overflow-auto'>
-                                                        {destinationStates.map((state) => (
-                                                            <CommandItem
+                                    {/* collectionDate */}
+                                    <FormField
+                                        control={form.control}
+                                        name='collectionDate'
+                                        render={({ field }) => {
+                                            return <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>
+                                                    Fecha recolección
+                                                </FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
                                                                 disabled={isPending}
-                                                                className='cursor-pointer'
-                                                                value={state.label}
-                                                                key={state.value}
-                                                                onSelect={() => {
-                                                                    setSelectedDestinationState(state.value);
-                                                                    form.setValue("destinyState", state.label);
-                                                                    loadCities(selectedDestinationCountry, state.value, 'destination');
-                                                                    handleStateChange(state.value, 'destination');
-                                                                }}
+                                                                variant={"outline"}
+                                                                className={cn(
+                                                                    "w-full pl-3 text-left font-normal",
+                                                                    !field.value && "text-muted-foreground"
+                                                                )}
                                                             >
-                                                                <Check
-                                                                    className={cn(
-                                                                        "mr-2 h-4 w-4",
-                                                                        state.label === field.value ? "opacity-100" : "opacity-0"
-                                                                    )}
-                                                                />
-                                                                {state.label}
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </Command>
-                                            </PopoverContent>
-                                        </Popover>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                )}
-                            />
+                                                                {field.value ? (
+                                                                    format(field.value, "PPP")
+                                                                ) : (
+                                                                    <span>Elige una fecha</span>
+                                                                )}
+                                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-auto p-0" align="start">
+                                                        <Calendar
+                                                            mode="single"
+                                                            selected={field.value}
+                                                            onSelect={field.onChange}
+                                                            disabled={(date) =>
+                                                                // date > new Date() || 
+                                                                date < new Date("1900-01-01")
+                                                            }
+                                                            initialFocus
+                                                        />
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+                                </CardContent>
+                            </Card>
 
-                            {/* destinyCity */}
-                            <FormField
-                                control={form.control}
-                                name='destinyCity'
-                                render={({ field }) => (
-                                    <FormItem className='flex flex-col'>
-                                        <FormLabel className='text-md'>Ciudad</FormLabel>
-                                        <Popover>
-                                            <PopoverTrigger asChild>
+                            {/* specs */}
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Detalles del embarque</CardTitle>
+                                    <CardDescription className='text-center'>Especificaciones del envío</CardDescription>
+                                </CardHeader>
+                                <CardContent className='flex flex-col space-y-5'>
+                                    {/* shippingDetails */}
+                                    <FormField
+                                        control={form.control}
+                                        name='shippingDetails'
+                                        render={({ field }) => {
+                                            return <FormItem>
+                                                <FormLabel className='text-md'>
+                                                    Detalles de envío
+                                                </FormLabel>
                                                 <FormControl>
-                                                    <Button
-                                                        variant="outline"
-                                                        role="combobox"
-                                                        className="w-full justify-between"
-                                                    >
-                                                        {field.value ? destinationCities.find((item) => item.label === field.value)?.label : "Seleccionar ciudad"}
-                                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                    </Button>
+                                                    <Input placeholder='Datos de detalles de envío' type='text' {...field} disabled={isPending}></Input>
                                                 </FormControl>
-                                            </PopoverTrigger>
-                                            <PopoverContent className="w-[250px] h-96 p-2">
-                                                <Command>
-                                                    <CommandInput placeholder="Buscar ubicaciones..." />
-                                                    <CommandEmpty>Sin resultados.</CommandEmpty>
-                                                    <CommandGroup className='flex overflow-auto'>
-                                                        {destinationCities.map((city) => (
-                                                            <CommandItem
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+
+                                    {/* recollection */}
+                                    <FormField
+                                        control={form.control}
+                                        name='recollection'
+                                        render={({ field }) => {
+                                            return <FormItem>
+                                                <FormLabel className='text-md'>
+                                                    Recolección
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='Datos de recolección' type='text' {...field} disabled={isPending}></Input>
+                                                </FormControl>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+                                </CardContent>
+                            </Card>
+
+
+
+                            {/* Origen del embarque */}
+                            <Card>
+
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Origen del embarque</CardTitle>
+                                    <CardDescription className='text-center'>¿Cual es el origen del embarque?</CardDescription>
+                                </CardHeader>
+
+                                <CardContent className='flex flex-col space-y-5'>
+                                    {/* OriginCountry */}
+                                    <FormField
+                                        control={form.control}
+                                        name='originCountry'
+                                        render={({ field }) => {
+                                            return <FormItem>
+                                                <FormLabel className='text-md'>
+                                                    País
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='País' type='text' {...field} disabled></Input>
+                                                </FormControl>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+
+                                    {/* originState */}
+                                    <FormField
+                                        control={form.control}
+                                        name='originState'
+                                        render={({ field }) => (
+                                            <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>Estado</FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
+                                                                className="w-full justify-between"
                                                                 disabled={isPending}
-                                                                className='cursor-pointer'
-                                                                value={city.label}
-                                                                key={city.value}
-                                                                onSelect={() => {
-                                                                    setSelectedDestinationCity(city.value);
-                                                                    form.setValue("destinyCity", city.label);
-                                                                }}
                                                             >
-                                                                <Check
-                                                                    className={cn(
-                                                                        "mr-2 h-4 w-4",
-                                                                        city.value === field.value ? "opacity-100" : "opacity-0"
-                                                                    )}
-                                                                />
-                                                                {city.label}
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </Command>
-                                            </PopoverContent>
-                                        </Popover>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                )}
-                            />
+                                                                {field.value ? originStates.find((item) => item.label === field.value)?.label : "Seleccionar estado"}
+                                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-[250px] h-96 p-2">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar ubicaciones..." />
+                                                            <CommandEmpty>Sin resultados.</CommandEmpty>
+                                                            <CommandGroup className='flex overflow-auto'>
+                                                                {originStates.map((state) => (
+                                                                    <CommandItem
+                                                                        disabled={isPending}
+                                                                        className='cursor-pointer'
+                                                                        value={state.label}
+                                                                        key={state.value}
+                                                                        onSelect={() => {
+                                                                            setSelectedOriginState(state.value);
+                                                                            form.setValue("originState", state.label);
+                                                                            loadCities(selectedOriginCountry, state.value, 'origin');
+                                                                            handleStateChange(state.value, 'origin');
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                state.label === field.value ? "opacity-100" : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {state.label}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {/* originCity */}
+                                    <FormField
+                                        control={form.control}
+                                        name='originCity'
+                                        render={({ field }) => (
+                                            <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>Ciudad</FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
+                                                                className="w-full justify-between"
+                                                            >
+                                                                {field.value ? originCities.find((item) => item.value === field.value)?.value : "Seleccionar ciudad"}
+                                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-[250px] h-96 p-2">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar ubicaciones..." />
+                                                            <CommandEmpty>Sin resultados.</CommandEmpty>
+                                                            <CommandGroup className='flex overflow-auto'>
+                                                                {originCities.map((city) => (
+                                                                    <CommandItem
+                                                                        disabled={isPending}
+                                                                        className='cursor-pointer'
+                                                                        value={city.value}
+                                                                        key={city.value}
+                                                                        onSelect={() => {
+                                                                            setSelectedOriginCity(city.value);
+                                                                            form.setValue("originCity", city.label);
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                city.value === field.value ? "opacity-100" : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {city.label}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </CardContent>
+                            </Card>
+
+                            {/* Destino del embarque */}
+                            <Card>
+
+                                <CardHeader>
+                                    <CardTitle className='font-bold text-center text-3xl'>Destino del embarque</CardTitle>
+                                    <CardDescription className='text-center'>¿Cual es el destino del embarque?</CardDescription>
+                                </CardHeader>
+                                
+                                <CardContent className='flex flex-col space-y-5'>
+                                    {/* destinyCountry */}
+                                    <FormField
+                                        control={form.control}
+                                        name='destinyCountry'
+                                        render={({ field }) => {
+                                            return <FormItem>
+                                                <FormLabel className='text-md'>
+                                                    País
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder='País' type='text' {...field} disabled></Input>
+                                                </FormControl>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        }}>
+                                    </FormField>
+
+                                    {/* destinyState */}
+                                    <FormField
+                                        control={form.control}
+                                        name='destinyState'
+                                        render={({ field }) => (
+                                            <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>Estado</FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
+                                                                className="w-full justify-between"
+                                                            >
+                                                                {field.value ? destinationStates.find((item) => item.label === field.value)?.label : "Seleccionar estado"}
+                                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-[250px] h-96 p-2">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar ubicaciones..." />
+                                                            <CommandEmpty>Sin resultados.</CommandEmpty>
+                                                            <CommandGroup className='flex overflow-auto'>
+                                                                {destinationStates.map((state) => (
+                                                                    <CommandItem
+                                                                        disabled={isPending}
+                                                                        className='cursor-pointer'
+                                                                        value={state.label}
+                                                                        key={state.value}
+                                                                        onSelect={() => {
+                                                                            setSelectedDestinationState(state.value);
+                                                                            form.setValue("destinyState", state.label);
+                                                                            loadCities(selectedDestinationCountry, state.value, 'destination');
+                                                                            handleStateChange(state.value, 'destination');
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                state.label === field.value ? "opacity-100" : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {state.label}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {/* destinyCity */}
+                                    <FormField
+                                        control={form.control}
+                                        name='destinyCity'
+                                        render={({ field }) => (
+                                            <FormItem className='flex flex-col'>
+                                                <FormLabel className='text-md'>Ciudad</FormLabel>
+                                                <Popover>
+                                                    <PopoverTrigger asChild>
+                                                        <FormControl>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
+                                                                className="w-full justify-between"
+                                                            >
+                                                                {field.value ? destinationCities.find((item) => item.label === field.value)?.label : "Seleccionar ciudad"}
+                                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="w-[250px] h-96 p-2">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar ubicaciones..." />
+                                                            <CommandEmpty>Sin resultados.</CommandEmpty>
+                                                            <CommandGroup className='flex overflow-auto'>
+                                                                {destinationCities.map((city) => (
+                                                                    <CommandItem
+                                                                        disabled={isPending}
+                                                                        className='cursor-pointer'
+                                                                        value={city.label}
+                                                                        key={city.value}
+                                                                        onSelect={() => {
+                                                                            setSelectedDestinationCity(city.value);
+                                                                            form.setValue("destinyCity", city.label);
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                city.value === field.value ? "opacity-100" : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {city.label}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage></FormMessage>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </CardContent>
+                            </Card>
+
                         </div>
 
-                        <Separator></Separator>
 
-                        <CardHeader>
-                            <CardTitle className='font-bold text-center text-3xl'>Detalles del embarque</CardTitle>
-                            <CardDescription className='text-center'>Especificaciones del envío</CardDescription>
-                        </CardHeader>
-
-                        {/* shippingDetails */}
-                        <FormField
-                            control={form.control}
-                            name='shippingDetails'
-                            render={({ field }) => {
-                                return <FormItem>
-                                    <FormLabel className='text-md'>
-                                        Detalles de envío
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input placeholder='Datos de detalles de envío' type='text' {...field} disabled={isPending}></Input>
-                                    </FormControl>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
-
-                        {/* recollection */}
-                        <FormField
-                            control={form.control}
-                            name='recollection'
-                            render={({ field }) => {
-                                return <FormItem>
-                                    <FormLabel className='text-md'>
-                                        Recolección
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input placeholder='Datos de recolección' type='text' {...field} disabled={isPending}></Input>
-                                    </FormControl>
-                                    <FormMessage></FormMessage>
-                                </FormItem>
-                            }}>
-                        </FormField>
-
-                        <Separator></Separator>
-
-                       
-
-                        <div className='flex flex-row space-x-4'>
-                            <Button asChild className='w-full' variant={'ghost'} disabled={isPending}>
-                                <Link href={"/loads/national"}>
-                                    <p>Volver</p>
-                                </Link>
-                            </Button>
-                            <Button className='w-full' type='submit' disabled={isPending}>
-
-                                {isPending ?
-                                    <p>Creando...</p>
-                                    :
-                                    <p>Crear</p>
-                                }
-                            </Button>
-                        </div>
                     </form>
                 </Form>
             </CardContent>

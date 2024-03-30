@@ -21,18 +21,22 @@ const register = async (values: z.infer<typeof RegisterSchema>) => {
         return { error: "¡Ya existe un usuario con el mismo email!" }
     }
 
-    await db.user.create({
-        data: {
-            name,
-            email,
-            password: hashedPassword,
-            admin,
-            loads,
-            billing,
-            finances,
-            contacts,
-        },
-    });
+    try {
+        await db.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+                admin,
+                loads,
+                billing,
+                finances,
+                contacts,
+            },
+        });
+    } catch (error) {
+        return { error: "¡Algo ha salido mal!" }
+    }
 
     return { success: "¡El usuario ha sido creado!" }
 }

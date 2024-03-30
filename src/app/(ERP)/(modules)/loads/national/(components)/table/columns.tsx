@@ -135,6 +135,7 @@ export const columns: ColumnDef<NationalSchema>[] = [
 
     {
         id: "actions",
+        header: "Acciones",
         cell: ({ row }) => {
             const data = row.original
 

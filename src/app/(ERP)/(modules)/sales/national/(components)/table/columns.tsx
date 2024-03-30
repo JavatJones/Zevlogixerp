@@ -179,6 +179,7 @@ export const columns: ColumnDef<Schema>[] = [
 
     {
         id: "actions",
+        header: "Acciones",
         cell: ({ row }) => {
             const data = row.original
 

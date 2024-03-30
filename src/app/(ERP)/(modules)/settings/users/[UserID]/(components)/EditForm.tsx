@@ -44,6 +44,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { FormError } from '@/components/forms/form-error'
 import { FormSuccess } from '@/components/forms/form-success'
+import { toast } from 'react-toastify';
 
 
 const EditForm: React.FC<getActualData> = (props) => {
@@ -87,7 +88,17 @@ const EditForm: React.FC<getActualData> = (props) => {
         .then((data) => {
           setError(data.error);
           setSuccess(data.success);
-          router.refresh()
+
+
+          if (data.error === undefined) {
+            router.refresh();
+          }
+
+          toast.success(data.success)
+          toast.error(data.error)
+
+        }).catch((error) => {
+          console.log(error)
         })
     });
   }
@@ -293,8 +304,6 @@ const EditForm: React.FC<getActualData> = (props) => {
             </div>
           </CardContent>
 
-          <FormError message={error}></FormError>
-          <FormSuccess message={success}></FormSuccess>
 
           <CardFooter className='flex flex-row space-x-4'>
             <Button asChild className='w-full' variant={'ghost'} disabled={isPending}>
@@ -305,9 +314,9 @@ const EditForm: React.FC<getActualData> = (props) => {
             <Button className='w-full' type='submit' disabled={isPending}>
 
               {isPending ?
-                <p>Actualizando...</p>
+                <p>Guardando...</p>
                 :
-                <p>Actualizar usuario</p>
+                <p>Guardar</p>
               }
             </Button>
           </CardFooter>

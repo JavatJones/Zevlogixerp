@@ -7,7 +7,7 @@ import { getNationalLoadByLoadID } from "@/data/loads";
 
 
 const createProvider = async (values: z.infer<typeof CreateFeeSchema>) => {
-    
+
     const validatedFields = CreateFeeSchema.safeParse(values);
     if (!validatedFields.success) {
         return { error: "Invalid fields!" }
@@ -16,21 +16,26 @@ const createProvider = async (values: z.infer<typeof CreateFeeSchema>) => {
     const { loadId, provider, cost } = validatedFields.data;
 
     // Crear nuevo proveedor para el embarque
-    await db.fees.create({
-        data: {
-            cost,
+    try {
+        await db.fees.create({
+            data: {
+                cost,
 
-            Contact: {
-                connect: { id: provider },
-               
+                Contact: {
+                    connect: { id: provider },
+
+                },
+
+                Load: {
+                    connect: { id: loadId }
+                },
+
             },
+        });
+    } catch (error) {
+        return { error: "¡Algo ha salido mal!" }
+    }
 
-            Load: {
-                connect: { id: loadId }
-            },
-
-        },
-    });
 
 
     return { success: `Proveedor agregado!`, }

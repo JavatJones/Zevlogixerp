@@ -32,6 +32,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { FormError } from '@/components/forms/form-error'
 import { FormSuccess } from '@/components/forms/form-success'
+import { toast } from 'react-toastify';
 
 
 const DeleteUserDialog: React.FC<getUser> = (props) => {
@@ -59,7 +60,17 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                 .then((data) => {
                     setError(data.error);
                     setSuccess(data.success);
-                    router.refresh();
+
+
+                    if (data.error === undefined) {
+                        router.refresh();
+                    }
+
+                    toast.success(data.success)
+                    toast.error(data.error)
+
+                }).catch((error) => {
+                    console.log(error)
                 })
         });
 
@@ -101,9 +112,6 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                             </FormField>
 
                             Esta acción no se puede deshacer. Esto borrará permanentemente la cuenta del sistema.
-
-                            <FormError message={error}></FormError>
-                            <FormSuccess message={success}></FormSuccess>
 
                         </AlertDialogDescription>
 

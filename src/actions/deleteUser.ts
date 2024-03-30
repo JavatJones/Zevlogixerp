@@ -22,14 +22,24 @@ const deleteUser = async (values: z.infer<typeof DeleteUserSchema>) => {
     }
 
 
+    //check if is an admin user
+    if (existingUser.email === 'dev@dev.com' || existingUser.email === 'marino.olalde@aldevaram.com') {
+        return { error: "¡Un usuario raíz no puede ser eliminado!" }
+    }
+
+
+
     // Delete user
-    await db.user.delete({
-        where: {
-            id,
-        }
+    try {
+        await db.user.delete({
+            where: {
+                id,
+            }
 
-    });
-
+        });
+    } catch (error) {
+        return { error: "¡Algo ha salido mal!" }
+    }
 
     return { success: "¡Usuario borrado!" }
 }

@@ -25,10 +25,10 @@ export type UserInfoSchema = {
 
 export const columns: ColumnDef<UserInfoSchema>[] = [
 
-    {
-        accessorKey: "id",
-        header: "Id",
-    },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
     {
         accessorKey: "name",
         header: ({ column }) => {
@@ -59,6 +59,7 @@ export const columns: ColumnDef<UserInfoSchema>[] = [
     },
     {
         id: "actions",
+        header: "Acciones",
         cell: ({ row }) => {
             const user = row.original
 

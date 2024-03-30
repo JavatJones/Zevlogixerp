@@ -23,20 +23,26 @@ function ModeToggle() {
         <Button variant={"Transparent"} size="icon">
           <Sun className="h-[1.8rem] w-[1.8rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.8rem] w-[1.8rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Temas</span>
+          <span className="sr-only text-center">Temas</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-5" align="center">
-        <DropdownMenuLabel>Temas</DropdownMenuLabel>
+      <DropdownMenuContent className="p-5 flex flex-col space-y-2" align="center">
+        <DropdownMenuLabel className="text-center">Temas</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Claro
+        <DropdownMenuItem asChild >
+          <Button variant={"ghost"} onClick={() => setTheme("light")}>
+            Claro
+          </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Oscuro
+        <DropdownMenuItem asChild>
+          <Button variant={"ghost"} onClick={() => setTheme("dark")}>
+            Oscuro
+          </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          Sistema
+        <DropdownMenuItem asChild>
+          <Button variant={"ghost"} onClick={() => setTheme("system")}>
+            Sistema
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

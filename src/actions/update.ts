@@ -23,20 +23,23 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
     }
 
     //Update User
-    await db.user.update({
-        where: {
-            id,
-        },
-        data: {
-            name,
-            admin,
-            loads,
-            finances,
-            billing,
-            contacts
-        },
-    });
-
+    try {
+        await db.user.update({
+            where: {
+                id,
+            },
+            data: {
+                name,
+                admin,
+                loads,
+                finances,
+                billing,
+                contacts
+            },
+        });
+    } catch (error) {
+        return { error: "¡Algo ha salido mal!" }
+    }
 
     return { success: "Usuario actualizado!" }
 }
