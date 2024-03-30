@@ -66,11 +66,12 @@ const Drawler = () => {
                     <p>Contenido</p>
 
                 </div>
-                <DrawerFooter>
+
+                {/* <DrawerFooter>
                     <DrawerClose asChild>
                         <Button>Cerrar</Button>
                     </DrawerClose>
-                </DrawerFooter>
+                </DrawerFooter> */}
 
             </DrawerContent>
         </Drawer>

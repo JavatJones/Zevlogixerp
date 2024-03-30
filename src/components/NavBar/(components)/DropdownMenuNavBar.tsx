@@ -23,12 +23,20 @@ const DropdownMenuNavBar = () => {
                     <Bolt className="h-[1.8rem] w-[1.8rem]" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="center">
-                <DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
+            <DropdownMenuContent className='mx-2' align="center">
+                <DropdownMenuLabel className='text-center'>Mi cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className='flex flex-col gap-2'>
-                    <DropdownMenuItem>Perfil</DropdownMenuItem>
-                    <DropdownMenuItem>Configuraciones</DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Button variant={'ghost'}>
+                            Perfil
+                        </Button>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Button variant={'ghost'}>
+                            Configuraciones
+                        </Button>
+                    </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                         <Button variant={"default"}>
                             Cerrar sesión

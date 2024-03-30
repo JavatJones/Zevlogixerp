@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { EditSaleNationalSchema } from "@/schemas/index"
-
+import { getNationalLoad } from "@/data/loads"
 
 const editSale = async (values: z.infer<typeof EditSaleNationalSchema>) => {
     const validatedFields = EditSaleNationalSchema.safeParse(values);
@@ -13,18 +13,18 @@ const editSale = async (values: z.infer<typeof EditSaleNationalSchema>) => {
 
     const { id, load, invoice, shipmentInvoice, salePrice, profit } = validatedFields.data;
 
-    // const existingLoad = await getNationalLoadByLoadID(load)
+    const existingLoad = await getNationalLoad(id)
 
-    // if (existingLoad) {
-    //     return { error: "El load ingresado ya existe!" }
+    if (!existingLoad) {
+        return { error: "¡El embarque no existe!" }
 
-    // }
+    }
 
+    console.log(`${salePrice}`)
 
-    
-    // Crear nuevo embarque
+    // Actualizar embarque
     await db.load.update({
-        where:{
+        where: {
             id,
         },
         data: {
