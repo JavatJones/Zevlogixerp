@@ -75,11 +75,11 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
             id: props.id,
             load: props.load,
 
-            invoice: props.invoice,
-            shipmentInvoice: props.shipmentInvoice,
+            invoice: props.invoice || undefined,
+            shipmentInvoice: props.shipmentInvoice || undefined,
 
-            salePrice: props.salePrice,
-            profit: props.profit,
+            salePrice: props.salePrice || undefined,
+            profit: props.profit || undefined,
 
         }
     });
@@ -133,7 +133,7 @@ const EditSaleNational: React.FC<LoadSaleData> = (props) => {
                             <CardTitle className='flex flex-row items-center'>
 
 
-                                {/* Load  ={isPending} */}
+                    
                                 <FormField
                                     control={form.control}
                                     name='load'

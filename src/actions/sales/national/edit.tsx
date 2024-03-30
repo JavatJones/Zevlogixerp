@@ -3,7 +3,6 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { EditSaleNationalSchema } from "@/schemas/index"
-import { getNationalLoadByLoadID } from "@/data/loads";
 
 
 const editSale = async (values: z.infer<typeof EditSaleNationalSchema>) => {
