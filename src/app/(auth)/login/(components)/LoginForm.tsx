@@ -60,17 +60,9 @@ const LoginForm = () => {
                     setError(data.error);
                     setSuccess(data.success);
 
-                    if (data.success === undefined) {
-                        form.reset()
-                        router.refresh();
-                    }
+                    form.reset()
+                    router.refresh();
 
-                    if (data.error === undefined) {
-                        form.reset()
-                        router.refresh();
-                    }
-
-                    toast.success(data.success)
                     toast.error(data.error)
 
                 }).catch((error) => {
@@ -120,7 +112,7 @@ const LoginForm = () => {
                                         <FormControl>
                                             <div className="relative">
                                                 <Input
-                                                    placeholder='*****'
+                                                    placeholder={showPassword ? 'Contraseña' : '******'}
                                                     type={showPassword ? 'text' : 'password'}
                                                     {...field}
                                                     disabled={isPending}
@@ -131,7 +123,7 @@ const LoginForm = () => {
                                                     type='button'
                                                     onClick={() => setShowPassword(!showPassword)}
                                                     className="absolute top-1/2 right-0 transform -translate-y-1/2"
-                                               
+
                                                 >
                                                     {showPassword ? <RiEyeOffLine /> : <RiEyeLine />}
                                                 </Button>

@@ -184,7 +184,7 @@ const EditForm: React.FC<getActualData> = (props) => {
                   return <FormItem>
                     <div className='flex flex-row justify-between items-center'>
                       <FormLabel className='text-md'>
-                        Cargamentos
+                        Embarques
                       </FormLabel>
                       <FormControl>
 

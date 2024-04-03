@@ -15,9 +15,12 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link';
 import { auth, signOut } from '@/lib/auth'
+import { getUserByEmail } from '@/data/user';
 
 const DropdownMenuNavBar = async () => {
     const session = await auth();
+
+    const UserData = await getUserByEmail(session?.user?.email!)
 
     return (
         <DropdownMenu>
@@ -27,14 +30,14 @@ const DropdownMenuNavBar = async () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className='mx-2' align="center">
-                <DropdownMenuLabel className='text-center'>
-                    {session?.user?.name}
+                <DropdownMenuLabel asChild className='text-center w-[140px]'>
+                    <p className='truncate'>{UserData?.name}</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className='flex flex-col gap-2'>
                     <DropdownMenuItem asChild>
                         <Button asChild variant={'ghost'}>
-                            <Link href={"account"}>Perfil</Link>
+                            <Link href={"/account"}>Perfil</Link>
                         </Button>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
@@ -42,7 +45,7 @@ const DropdownMenuNavBar = async () => {
                             "use server"
                             await signOut();
                         }}>
-                            <Button type='submit' variant={"default"}>
+                            <Button className='w-full' type='submit' variant={"default"}>
                                 Cerrar sesión
                             </Button>
                         </form>
