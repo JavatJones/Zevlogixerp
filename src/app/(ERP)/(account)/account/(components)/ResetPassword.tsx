@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 //actions
-import resetPassword from "@/actions/resetPassword"
+import resetPassword from "@/actions/account/updatePasswordUser"
 type getUser = {
     id: string;
 }
@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input"
 
 //validation
 import * as z from "zod";
-import { ResetPasswordSchema } from "@/schemas/index"
+import { ResetPasswordUserSchema } from "@/schemas/index"
 import { useTransition } from 'react'
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,17 +43,18 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
 
 
     //Validation
-    const form = useForm<z.infer<typeof ResetPasswordSchema>>({
-        resolver: zodResolver(ResetPasswordSchema),
+    const form = useForm<z.infer<typeof ResetPasswordUserSchema>>({
+        resolver: zodResolver(ResetPasswordUserSchema),
         defaultValues: {
             id: props.id,
+            old_password: "",
             password: "",
             passwordConfirm: "",
         }
     });
 
     //upload user to delete
-    const onSubmit = (values: z.infer<typeof ResetPasswordSchema>) => {
+    const onSubmit = (values: z.infer<typeof ResetPasswordUserSchema>) => {
         setError("");
         setSuccess("");
 
@@ -96,6 +97,24 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                     <form id='' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
 
                         <AlertDialogDescription className='flex flex-col space-y-5'>
+
+                            <FormField
+                                control={form.control}
+                                name='old_password'
+                                render={({ field }) => {
+                                    return <FormItem>
+                                        <div className='flex flex-col space-y-2'>
+                                            <FormLabel className='text-md'>
+                                                Contraseña antigua
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input placeholder='Escribe la contraseña' type='text' {...field} disabled={isPending}></Input>
+                                            </FormControl>
+                                        </div>
+                                        <FormMessage></FormMessage>
+                                    </FormItem>
+                                }}>
+                            </FormField>
 
                             <FormField
                                 control={form.control}

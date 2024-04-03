@@ -26,7 +26,7 @@ function ModeToggle() {
           <span className="sr-only text-center">Temas</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-5 flex flex-col space-y-2" align="center">
+      <DropdownMenuContent className="p-5 flex flex-col" align="center">
         <DropdownMenuLabel className="text-center">Temas</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild >

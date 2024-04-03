@@ -34,7 +34,7 @@ const DropdownMenuNavBar = async () => {
                     <p className='truncate'>{UserData?.name}</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col'>
                     <DropdownMenuItem asChild>
                         <Button asChild variant={'ghost'}>
                             <Link href={"/account"}>Perfil</Link>

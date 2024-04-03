@@ -53,6 +53,19 @@ export const ResetPasswordSchema = z.object({
     path: ["passwordConfirm"]
 })
 
+export const ResetPasswordUserSchema = z.object({
+    id: z.string(),
+    old_password: z.string(),
+    password: z.string().min(1, { message: 'Ingresa una contraseña' }).regex(passwordValidation, { message: 'La contraseña debe tener mínimo 10 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial Ej . ! @ # $ % & * ^' }),
+    passwordConfirm: z.string(),
+}).refine((data) => {
+    return data.password === data.passwordConfirm
+}, {
+    message: "Las contraseñas no coinciden!",
+    path: ["passwordConfirm"]
+})
+
+
 
 //register update a client contact
 export const CreateNewClientSchema = z.object({

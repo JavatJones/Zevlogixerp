@@ -3,16 +3,16 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import bcrypt from "bcryptjs";
-import { ResetPasswordSchema } from "@/schemas/index"
+import { ResetPasswordUserSchema } from "@/schemas/index"
 import { getUserByID } from "@/data/user";
 
-const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
-    const validatedFields = ResetPasswordSchema.safeParse(values);
+const updatePasswordUser = async (values: z.infer<typeof ResetPasswordUserSchema>) => {
+    const validatedFields = ResetPasswordUserSchema.safeParse(values);
     if (!validatedFields.success) {
         return { error: "Invalid fields!" }
     }
 
-    const { id, password } = validatedFields.data;
+    const { id, old_password, password } = validatedFields.data;
 
     //Check if the user exists
     const existingUser = await getUserByID(id);
@@ -20,6 +20,13 @@ const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
     if (!existingUser) {
         return { error: "¡No existe el usuario!" }
     }
+
+    const comparePW = await bcrypt.compare(old_password, existingUser.password)
+
+    if (!comparePW) {
+        return { error: "¡La contraseña antigua no coincide!" }
+    }
+
 
     //hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,7 +51,7 @@ const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
         return { error: "¡Algo ha salido mal!" }
     }
 
-    return { success: `La contraseña se ha actualizado!` }
+    return { success: `¡La contraseña se ha actualizado!` }
 }
 
-export default resetPassword
+export default updatePasswordUser
