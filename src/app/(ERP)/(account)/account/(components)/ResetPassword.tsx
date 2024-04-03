@@ -87,7 +87,11 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
         <AlertDialog>
 
             <AlertDialogTrigger asChild>
-                <Button variant="ghost">Cambiar contraseña</Button>
+                <Button variant="ghost">
+                    <p className='truncate'>
+                        Cambiar contraseña
+                    </p>
+                </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

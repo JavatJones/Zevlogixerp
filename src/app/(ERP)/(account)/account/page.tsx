@@ -10,8 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import ResetPassword from './(components)/ResetPassword'
+import UpdateName from './(components)/UpdateName'
 import { auth } from '@/lib/auth'
 import { getUserByEmail } from '@/data/user'
+
+export const dynamic = 'force-dynamic'
 
 
 const ProfilePage = async () => {
@@ -43,7 +46,8 @@ const ProfilePage = async () => {
                 <CardTitle>Perfil</CardTitle>
                 <CardDescription>Configura aspectos relacionados a tu perfil</CardDescription>
               </CardHeader>
-              <CardContent className='p-2'>
+              <CardContent className='flex flex-col space-y-2'>
+                <UpdateName id={UserData?.id!} name={UserData?.name!}></UpdateName>
                 <ResetPassword id={UserData?.id!}></ResetPassword>
               </CardContent>
               {/* <CardFooter>

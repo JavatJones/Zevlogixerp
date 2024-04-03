@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 //actions
-import UpdateName from "@/actions/updateName"
+import UpdateName from "@/actions/account/updateName"
 type getUser = {
     id: string;
     name: string;
@@ -48,8 +48,8 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
         resolver: zodResolver(UpdateNameSchema),
         defaultValues: {
             id: props.id,
-            name: props.name,
-      
+            name: "",
+
         }
     });
 
@@ -87,11 +87,15 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
         <AlertDialog>
 
             <AlertDialogTrigger asChild>
-                <Button variant="ghost">Cambiar contraseña</Button>
+                <Button variant="ghost" >
+                    <p className='truncate'>
+                        Cambiar nombre
+                    </p>
+                </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Cambiar contraseña</AlertDialogTitle>
+                    <AlertDialogTitle>Cambiar nombre</AlertDialogTitle>
                 </AlertDialogHeader>
                 <Form {...form}>
                     <form id='' onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
@@ -105,10 +109,10 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                                     return <FormItem>
                                         <div className='flex flex-col space-y-2'>
                                             <FormLabel className='text-md'>
-                                                Contraseña
+                                                Nombre
                                             </FormLabel>
                                             <FormControl>
-                                                <Input placeholder='Escribe la contraseña' type='text' {...field} disabled={isPending}></Input>
+                                                <Input placeholder='Escribe el nombre' type='text' {...field} disabled={isPending}></Input>
                                             </FormControl>
                                         </div>
                                         <FormMessage></FormMessage>
