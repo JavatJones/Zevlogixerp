@@ -23,7 +23,6 @@ const ProfilePage = async () => {
 
     <Card>
       <CardHeader>
-        {JSON.stringify(session)}
         <CardTitle>{UserData?.name}</CardTitle>
         {/* <CardDescription>ID_User</CardDescription> */}
       </CardHeader>
