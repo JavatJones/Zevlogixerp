@@ -13,9 +13,12 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button'
+import Link from 'next/link';
+import { auth, signOut } from '@/lib/auth'
 
+const DropdownMenuNavBar = async () => {
+    const session = await auth();
 
-const DropdownMenuNavBar = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -24,23 +27,25 @@ const DropdownMenuNavBar = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className='mx-2' align="center">
-                <DropdownMenuLabel className='text-center'>Mi cuenta</DropdownMenuLabel>
+                <DropdownMenuLabel className='text-center'>
+                    {session?.user?.name}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className='flex flex-col gap-2'>
                     <DropdownMenuItem asChild>
-                        <Button variant={'ghost'}>
-                            Perfil
+                        <Button asChild variant={'ghost'}>
+                            <Link href={"account"}>Perfil</Link>
                         </Button>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <Button variant={'ghost'}>
-                            Configuraciones
-                        </Button>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                        <Button variant={"default"}>
-                            Cerrar sesión
-                        </Button>
+                        <form action={async () => {
+                            "use server"
+                            await signOut();
+                        }}>
+                            <Button type='submit' variant={"default"}>
+                                Cerrar sesión
+                            </Button>
+                        </form>
                     </DropdownMenuItem>
                 </div>
             </DropdownMenuContent>

@@ -10,28 +10,31 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import ResetPassword from './(components)/ResetPassword'
+import { auth } from '@/lib/auth'
 
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+  const session = await auth();
+
   return (
 
 
-    <div>
+    <Card>
       <CardHeader>
-        <CardTitle>Nombre y apellido del usuario del erp</CardTitle>
-        <CardDescription>ID_User</CardDescription>
+        <CardTitle>{session?.user?.name}</CardTitle>
+        {/* <CardDescription>ID_User</CardDescription> */}
       </CardHeader>
       <CardContent className='flex flex-col'>
 
 
 
-        <Card>
+        <div>
           <CardHeader>
             <CardTitle>Opciones</CardTitle>
             <CardDescription>Personaliza algunos aspectos del sistema</CardDescription>
           </CardHeader>
 
-          <CardContent className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
+          <CardContent className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
 
             <Card className='flex-grow basis-10'>
               <CardHeader>
@@ -39,7 +42,6 @@ const ProfilePage = () => {
                 <CardDescription>Configura aspectos relacionados a tu perfil</CardDescription>
               </CardHeader>
               <CardContent>
-
                 <ResetPassword id='1'></ResetPassword>
               </CardContent>
               {/* <CardFooter>
@@ -48,10 +50,10 @@ const ProfilePage = () => {
             </Card>
 
           </CardContent>
-        </Card>
+        </div>
       </CardContent>
 
-    </div>
+    </Card>
   )
 }
 
