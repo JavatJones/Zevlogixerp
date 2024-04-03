@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri'; // Importa los iconos necesarios
 
 
 //validation
@@ -33,9 +34,11 @@ import { useRouter } from 'next/navigation'
 
 
 const LoginForm = () => {
+
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
+    const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
 
     const [isPending, startTransition] = useTransition();
 
@@ -115,7 +118,24 @@ const LoginForm = () => {
                                             Contraseña
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder='*****' type='password' {...field} disabled={isPending}></Input>
+                                            <div className="relative">
+                                                <Input
+                                                    placeholder='*****'
+                                                    type={showPassword ? 'text' : 'password'}
+                                                    {...field}
+                                                    disabled={isPending}
+                                                    className="py-2 px-3 border rounded-lg w-full"
+                                                />
+                                                <Button
+                                                    size={'icon'}
+                                                    type='button'
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    className="absolute top-1/2 right-0 transform -translate-y-1/2"
+                                               
+                                                >
+                                                    {showPassword ? <RiEyeOffLine /> : <RiEyeLine />}
+                                                </Button>
+                                            </div>
                                         </FormControl>
                                         <FormMessage></FormMessage>
                                     </FormItem>
