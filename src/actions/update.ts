@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 import * as z from "zod";
 import { UpdateSchema } from "@/schemas/index"
-import { getUserByID } from "@/data/user";
+import { getUserByEmail, getUserByID } from "@/data/user";
 
 
 const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
@@ -12,7 +12,7 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
         return { error: "Invalid fields!" }
     }
 
-    const { id, name, admin, loads, finances, billing, contacts } = validatedFields.data;
+    const { id, name, email: newEmail, admin, loads, finances, billing, contacts } = validatedFields.data;
 
 
     //Check if the user exists
@@ -21,6 +21,17 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
     if (!existingUser) {
         return { error: "¡No existe el usuario!" }
     }
+
+    // Verificar si el correo electrónico se ha modificado
+    if (existingUser.email !== newEmail) {
+        // Verificar si el nuevo correo electrónico ya está en uso por otro usuario
+        const existingEmail = await getUserByEmail(newEmail);
+
+        if (existingEmail) {
+            return { error: "¡Ya existe ese correo electrónico!" };
+        }
+    }
+
 
     //Update User
     try {
@@ -31,6 +42,7 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
             data: {
                 name,
                 admin,
+                email: newEmail,
                 loads,
                 finances,
                 billing,
@@ -38,10 +50,10 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
             },
         });
     } catch (error) {
-        return { error: "¡Algo ha salido mal!" }
+        return { error: "¡Algo ha salido mal al actualizar el usuario!" }
     }
 
-    return { success: "¡Usuario actualizado!" }
+    return { success: "¡Usuario actualizado exitosamente!" }
 }
 
 export default updateUser

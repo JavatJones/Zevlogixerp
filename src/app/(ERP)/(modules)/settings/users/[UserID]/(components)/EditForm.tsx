@@ -66,15 +66,6 @@ const EditForm: React.FC<getActualData> = (props) => {
       finances: props.finances,
       billing: props.billing,
       contacts: props.contacts,
-
-      // id: props.id,
-      // name: props.name,
-      // email: props.email,
-
-      // admin: props.admin,
-      // loads: props.loads,
-      // finances: props.finances,
-      // billing: props.billing
     }
   });
 
@@ -114,26 +105,6 @@ const EditForm: React.FC<getActualData> = (props) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
           <CardContent className='flex flex-col space-y-5'>
 
-            {/* dummy for id*/}
-            <FormField
-              control={form.control}
-              name='id'
-              render={({ field }) => {
-                return <FormItem>
-                  <div className='hidden flex-row space-x-4 items-center'>
-                    <FormLabel className='text-md'>
-                      id
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder='id' type='text' {...field} disabled></Input>
-                    </FormControl>
-                  </div>
-                  <FormMessage></FormMessage>
-                </FormItem>
-              }}>
-            </FormField>
-
-
             <div className='flex flex-col space-y-5'>
               {/* Nombre */}
               <FormField
@@ -164,7 +135,7 @@ const EditForm: React.FC<getActualData> = (props) => {
                         Correo
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder='Email del usuario' type='text' {...field} disabled></Input>
+                        <Input placeholder='Email del usuario' type='text' {...field} disabled={isPending}></Input>
                       </FormControl>
                     </div>
                     <FormMessage></FormMessage>

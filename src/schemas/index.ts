@@ -44,7 +44,7 @@ export const DeleteUserSchema = z.object({
 
 export const ResetPasswordSchema = z.object({
     id: z.string(),
-    password: z.string().min(1, { message: 'Ingresa una contraseña' }).regex(passwordValidation, { message: 'La contraseña debe tener mínimo 10 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial Ej ! @ # $ % & * ^' }),
+    password: z.string().min(1, { message: 'Ingresa una contraseña' }).regex(passwordValidation, { message: 'La contraseña debe tener mínimo 10 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial Ej . ! @ # $ % & * ^' }),
     passwordConfirm: z.string(),
 }).refine((data) => {
     return data.password === data.passwordConfirm
