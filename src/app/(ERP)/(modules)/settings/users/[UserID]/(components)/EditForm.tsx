@@ -105,6 +105,7 @@ const EditForm: React.FC<getActualData> = (props) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
           <CardContent className='flex flex-col space-y-5'>
 
+
             <div className='flex flex-col space-y-5'>
               {/* Nombre */}
               <FormField
