@@ -11,17 +11,20 @@ import {
 } from "@/components/ui/card"
 import ResetPassword from './(components)/ResetPassword'
 import { auth } from '@/lib/auth'
+import { getUserByEmail } from '@/data/user'
 
 
 const ProfilePage = async () => {
   const session = await auth();
+  const UserData = await getUserByEmail(session?.user?.email!)
 
   return (
 
 
     <Card>
       <CardHeader>
-        <CardTitle>{session?.user?.name}</CardTitle>
+        {JSON.stringify(session)}
+        <CardTitle>{UserData?.name}</CardTitle>
         {/* <CardDescription>ID_User</CardDescription> */}
       </CardHeader>
       <CardContent className='flex flex-col'>
