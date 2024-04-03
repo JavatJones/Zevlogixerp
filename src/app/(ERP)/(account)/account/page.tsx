@@ -36,15 +36,15 @@ const ProfilePage = async () => {
             <CardDescription>Personaliza algunos aspectos del sistema</CardDescription>
           </CardHeader>
 
-          <CardContent className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
+          <CardContent className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 p-0'>
 
-            <Card className='flex-grow basis-10'>
+            <Card className=''>
               <CardHeader>
                 <CardTitle>Perfil</CardTitle>
                 <CardDescription>Configura aspectos relacionados a tu perfil</CardDescription>
               </CardHeader>
-              <CardContent>
-                <ResetPassword id='1'></ResetPassword>
+              <CardContent className='p-2'>
+                <ResetPassword id={UserData?.id!}></ResetPassword>
               </CardContent>
               {/* <CardFooter>
                 <p>Card Footer</p>
