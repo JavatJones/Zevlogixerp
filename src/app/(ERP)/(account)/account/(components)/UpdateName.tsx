@@ -3,9 +3,10 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 //actions
-import resetPassword from "@/actions/resetPassword"
+import UpdateName from "@/actions/updateName"
 type getUser = {
     id: string;
+    name: string;
 }
 
 import {
@@ -25,7 +26,7 @@ import { Input } from "@/components/ui/input"
 
 //validation
 import * as z from "zod";
-import { ResetPasswordSchema } from "@/schemas/index"
+import { UpdateNameSchema } from "@/schemas/index"
 import { useTransition } from 'react'
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,22 +44,22 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
 
 
     //Validation
-    const form = useForm<z.infer<typeof ResetPasswordSchema>>({
-        resolver: zodResolver(ResetPasswordSchema),
+    const form = useForm<z.infer<typeof UpdateNameSchema>>({
+        resolver: zodResolver(UpdateNameSchema),
         defaultValues: {
             id: props.id,
-            password: "",
-            passwordConfirm: "",
+            name: props.name,
+      
         }
     });
 
     //upload user to delete
-    const onSubmit = (values: z.infer<typeof ResetPasswordSchema>) => {
+    const onSubmit = (values: z.infer<typeof UpdateNameSchema>) => {
         setError("");
         setSuccess("");
 
         startTransition(() => {
-            resetPassword(values)
+            UpdateName(values)
                 .then((data) => {
 
                     setError(data.error);
@@ -99,7 +100,7 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
 
                             <FormField
                                 control={form.control}
-                                name='password'
+                                name='name'
                                 render={({ field }) => {
                                     return <FormItem>
                                         <div className='flex flex-col space-y-2'>
@@ -108,24 +109,6 @@ const DeleteUserDialog: React.FC<getUser> = (props) => {
                                             </FormLabel>
                                             <FormControl>
                                                 <Input placeholder='Escribe la contraseña' type='text' {...field} disabled={isPending}></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField>
-
-                            <FormField
-                                control={form.control}
-                                name='passwordConfirm'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='flex flex-col space-y-2'>
-                                            <FormLabel className='text-md'>
-                                                Confirmar Contraseña
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='Vuelve a escribir la contraseña' type='text' {...field} disabled={isPending}></Input>
                                             </FormControl>
                                         </div>
                                         <FormMessage></FormMessage>

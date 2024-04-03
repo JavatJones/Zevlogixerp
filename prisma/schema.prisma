@@ -19,6 +19,7 @@ model User {
   admin      Boolean
   loads      Boolean
   finances   Boolean
+  sales      Boolean
   billing    Boolean
   contacts   Boolean
   accounts   Account[]

@@ -2,17 +2,17 @@
 
 import { db } from "@/lib/db";
 import * as z from "zod";
-import { UpdateSchema } from "@/schemas/index"
+import { UpdateNameSchema } from "@/schemas/index"
 import { getUserByID } from "@/data/user";
 
 
-const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
-    const validatedFields = UpdateSchema.safeParse(values);
+const updateUser = async (values: z.infer<typeof UpdateNameSchema>) => {
+    const validatedFields = UpdateNameSchema.safeParse(values);
     if (!validatedFields.success) {
         return { error: "Invalid fields!" }
     }
 
-    const { id, name, admin, loads, finances, billing, contacts } = validatedFields.data;
+    const { id, name } = validatedFields.data;
 
 
     //Check if the user exists
@@ -30,11 +30,6 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
             },
             data: {
                 name,
-                admin,
-                loads,
-                finances,
-                billing,
-                contacts
             },
         });
     } catch (error) {

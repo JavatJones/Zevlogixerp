@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 import * as z from "zod";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { RegisterSchema } from "@/schemas/index"
 import { getUserByEmail } from "@/data/user";
 
@@ -12,7 +12,7 @@ const register = async (values: z.infer<typeof RegisterSchema>) => {
         return { error: "Invalid fields!" }
     }
 
-    const { email, password, name, admin, loads, finances, billing, contacts } = validatedFields.data;
+    const { email, password, name, admin, loads, finances, sales, billing, contacts } = validatedFields.data;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await getUserByEmail(email);
@@ -30,6 +30,7 @@ const register = async (values: z.infer<typeof RegisterSchema>) => {
                 admin,
                 loads,
                 billing,
+                sales,
                 finances,
                 contacts,
             },

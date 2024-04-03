@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(ERP)/(modules)/loads/national/create/(components)/CreateLoadNational.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(ERP)/(modules)/loads/national/create/(components)/CreateLoadNational.tsx", "src/api/auth/[...nextauth]"],
   "exclude": ["node_modules"]
 }

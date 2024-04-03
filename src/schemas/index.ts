@@ -16,6 +16,7 @@ export const RegisterSchema = z.object({
     password: z.string().min(1, { message: 'Ingresa una contraseña' }).regex(passwordValidation, { message: 'La contraseña debe tener mínimo 10 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial Ej ! @ # $ % & * ^' }),
     admin: z.boolean().default(false),
     loads: z.boolean().default(false),
+    sales: z.boolean().default(false),
     finances: z.boolean().default(false),
     billing: z.boolean().default(false),
     contacts: z.boolean().default(false),
@@ -30,6 +31,11 @@ export const UpdateSchema = z.object({
     finances: z.boolean().default(false),
     billing: z.boolean().default(false),
     contacts: z.boolean().default(false),
+});
+
+export const UpdateNameSchema = z.object({
+    id: z.string(),
+    name: z.string().min(1, "Porfavor ingresa un nombre"),
 });
 
 export const DeleteUserSchema = z.object({

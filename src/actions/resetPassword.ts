@@ -24,6 +24,12 @@ const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
     //hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //check if is an admin user
+    if (existingUser.email === 'dev@dev.com') {
+        return { error: "¡Un usuario raíz no puede ser actualizado!" }
+    }
+
+
     // Update user
     try {
         await db.user.update({

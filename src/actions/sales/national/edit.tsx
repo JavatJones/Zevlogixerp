@@ -20,8 +20,6 @@ const editSale = async (values: z.infer<typeof EditSaleNationalSchema>) => {
 
     }
 
-    console.log(`${salePrice}`)
-
     // Actualizar embarque
     await db.load.update({
         where: {
