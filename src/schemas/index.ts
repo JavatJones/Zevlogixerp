@@ -93,14 +93,15 @@ export const CreateNewProviderSchema = z.object({
 });
 
 
-//REGISTER NEW ADDRESS TO A CLIENT
+//REGISTER NEW ADDRESS TO CLIENT
 export const CreateNewAddressClientSchema = z.object({
     id: z.string(),
-    address: z.string().min(1, "Minimo un caracter"),
-    codePostal: z.string().min(1, "Minimo un caracter"),
-    city: z.string().min(1, "Minimo un caracter"),
-    state: z.string().min(1, "Minimo un caracter"),
-    country: z.string().min(1, "Minimo un caracter"),
+    name: z.string().min(1, "Agrega un nombre a esta ubicación"),
+    address: z.string().min(1, "Agrega la dirección del cliente"),
+    codePostal: z.string().min(1, "Agrega el código postal"),
+    city: z.string().min(1, "Selecciona la ciudad"),
+    state: z.string().min(1, "Selecciona el estado"),
+    country: z.string().min(1, "Selecciona el país"),
 });
 
 //DELETE ADDRESS TO A CLIENT

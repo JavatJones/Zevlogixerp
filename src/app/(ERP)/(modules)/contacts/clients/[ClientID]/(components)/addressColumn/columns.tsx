@@ -17,6 +17,7 @@ import DeleteAddressDialog from "../DeleteAddressDialog";
 
 export type AddressInfoSchema = {
     id: string
+    name: string
     address: string
     codePostal: string
     city: string
@@ -32,17 +33,22 @@ export const columns: ColumnDef<AddressInfoSchema>[] = [
     //     header: "Id",
     // },
     {
-        accessorKey: "address",
-        header: "Dirección",
+        accessorKey: "name",
+        header: "Nombre",
     },
     {
-        accessorKey: "city",
-        header: "Ciudad",
+        accessorKey: "address",
+        header: "Dirección",
     },
     {
         accessorKey: "codePostal",
         header: "Código postal",
     },
+    {
+        accessorKey: "city",
+        header: "Ciudad",
+    },
+
     {
         accessorKey: "state",
         header: "Estado",

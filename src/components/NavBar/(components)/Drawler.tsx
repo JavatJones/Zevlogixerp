@@ -23,7 +23,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
-import ModulesList from '@/app/(ERP)/(home)/(dash)/(components)/ModulesList';
+import Modules from '@/components/myUi/Modules';
 
 const Drawler = () => {
     return (
@@ -47,7 +47,7 @@ const Drawler = () => {
 
                 <div className="flex flex-col gap-5 p-2 h-6/6 overflow-y-auto">
                     
-                    <ModulesList></ModulesList>
+                    <Modules></Modules>
 
                 </div>
 

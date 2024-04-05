@@ -10,11 +10,12 @@ const createAddress = async (values: z.infer<typeof CreateNewAddressClientSchema
         return { error: "Invalid fields!" }
     }
 
-    const { id, address, city, state, codePostal, country } = validatedFields.data;
+    const { id, name, address, city, state, codePostal, country } = validatedFields.data;
 
     await db.address.create({
 
         data: {
+            name,
             address,
             city,
             state,

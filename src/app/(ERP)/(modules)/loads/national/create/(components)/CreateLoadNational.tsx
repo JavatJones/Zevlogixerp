@@ -35,8 +35,6 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
-import { Switch } from '@/components/ui/switch'
-import { Separator } from "@/components/ui/separator"
 import { toast } from 'react-toastify';
 
 //validation
@@ -46,8 +44,6 @@ import { useTransition } from 'react'
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { FormError } from '@/components/forms/form-error'
-import { FormSuccess } from '@/components/forms/form-success'
 
 type GetClientsName = {
     id: string;

@@ -105,6 +105,7 @@ model Contact {
 
 model Address {
   id         String   @id @default(cuid())
+  name       String?
   address    String
   codePostal String
   city       String

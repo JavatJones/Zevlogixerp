@@ -22,6 +22,7 @@ import { getAllAddressByID } from '@/data/contacts'
 // This type is used to define the shape of our data.
 type AddressSchema = {
     id: string
+    name: string
     address: string
     codePostal: string
     city: string
@@ -42,6 +43,7 @@ const AddressInfo: React.FC<getIDUser> = async (props) => {
 
         return address.map((ubi: any) => ({
             id: ubi.id,
+            name: ubi.name,
             address: ubi.address,
             city: ubi.city,
             codePostal: ubi.codePostal,
