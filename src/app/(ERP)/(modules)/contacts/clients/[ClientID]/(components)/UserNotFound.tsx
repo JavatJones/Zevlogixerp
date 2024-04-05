@@ -24,7 +24,10 @@ const UserNotFound: React.FC<User> = (props) => {
                     <CardTitle className='flex flex-row gap-3 items-center'> <AlertCircle size={50} /> Error #404</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p>No se ha encontrado al usuario {props.errorID}</p>
+                    <p className='truncate'>No se ha encontrado al usuario
+                        <br></br>
+                        {props.errorID}
+                    </p>
                 </CardContent>
                 <CardFooter>
                     <Link className='hover:underline' href={"/contacts/clients"}>Ver todos los usuarios disponibles</Link>

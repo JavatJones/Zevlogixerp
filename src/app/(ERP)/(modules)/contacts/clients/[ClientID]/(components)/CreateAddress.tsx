@@ -214,7 +214,7 @@ const CreateAddress: React.FC<ClientData> = (props) => {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col space-y-5'>
 
-                        <AlertDialogDescription className='flex flex-col space-y-5'>
+                        <AlertDialogDescription className='flex flex-col space-y-5 overflow-y-auto max-h-[390px]' >
 
                             <p>Esta acción no se puede deshacer. Esto editara los campos del sistema.</p>
 
@@ -443,65 +443,6 @@ const CreateAddress: React.FC<ClientData> = (props) => {
                                     </FormItem>
                                 )}
                             />
-
-
-                            {/* city */}
-                            {/* <FormField
-                                control={form.control}
-                                name='city'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='flex flex-col space-y-3 items-start'>
-                                            <FormLabel className='text-md'>
-                                                Ciudad
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='Ciudad' type='text' {...field} disabled={isPending}></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField> */}
-
-                            {/* state */}
-                            {/* <FormField
-                                control={form.control}
-                                name='state'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='flex flex-col space-y-3 items-start'>
-                                            <FormLabel className='text-md'>
-                                                Estado
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='Estado' type='text' {...field} disabled={isPending}></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField> */}
-
-                            {/* country */}
-                            {/* <FormField
-                                control={form.control}
-                                name='country'
-                                render={({ field }) => {
-                                    return <FormItem>
-                                        <div className='flex flex-col space-y-3 items-start'>
-                                            <FormLabel className='text-md'>
-                                                País
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='País' type='text' {...field} disabled={isPending}></Input>
-                                            </FormControl>
-                                        </div>
-                                        <FormMessage></FormMessage>
-                                    </FormItem>
-                                }}>
-                            </FormField> */}
-
                         </AlertDialogDescription>
 
                         <AlertDialogFooter>
