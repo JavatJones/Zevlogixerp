@@ -18,6 +18,8 @@ type getActualData = {
   finances: boolean;
   billing: boolean;
   contacts: boolean;
+  sales: boolean;
+  quotes: boolean;
 }
 
 //ui
@@ -66,6 +68,8 @@ const EditForm: React.FC<getActualData> = (props) => {
       finances: props.finances,
       billing: props.billing,
       contacts: props.contacts,
+      quotes: props.quotes,
+      sales: props.sales,
     }
   });
 
@@ -233,6 +237,54 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <div className='flex flex-row justify-between items-center'>
                       <FormLabel className='text-md'>
                         Facturación
+                      </FormLabel>
+                      <FormControl>
+
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage></FormMessage>
+                  </FormItem>
+                }}>
+              </FormField>
+
+              {/* sales */}
+              <FormField
+                control={form.control}
+                name='sales'
+                render={({ field }) => {
+                  return <FormItem>
+                    <div className='flex flex-row justify-between items-center'>
+                      <FormLabel className='text-md'>
+                        Ventas
+                      </FormLabel>
+                      <FormControl>
+
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage></FormMessage>
+                  </FormItem>
+                }}>
+              </FormField>
+
+                {/* quotes */}
+                <FormField
+                control={form.control}
+                name='quotes'
+                render={({ field }) => {
+                  return <FormItem>
+                    <div className='flex flex-row justify-between items-center'>
+                      <FormLabel className='text-md'>
+                        Cotizaciones
                       </FormLabel>
                       <FormControl>
 

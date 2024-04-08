@@ -18,6 +18,7 @@ export const RegisterSchema = z.object({
     loads: z.boolean().default(false),
     sales: z.boolean().default(false),
     finances: z.boolean().default(false),
+    quotes: z.boolean().default(false),
     billing: z.boolean().default(false),
     contacts: z.boolean().default(false),
 });
@@ -31,6 +32,8 @@ export const UpdateSchema = z.object({
     finances: z.boolean().default(false),
     billing: z.boolean().default(false),
     contacts: z.boolean().default(false),
+    quotes: z.boolean().default(false),
+    sales: z.boolean().default(false),
 });
 
 export const UpdateNameSchema = z.object({

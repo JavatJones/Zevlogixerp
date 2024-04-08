@@ -12,14 +12,14 @@ import {
 import ResetPassword from './(components)/ResetPassword'
 import UpdateName from './(components)/UpdateName'
 import { auth } from '@/lib/auth'
-import { getUserByEmail } from '@/data/user'
+import { getUserByID } from '@/data/user'
 
 export const dynamic = 'force-dynamic'
 
 
 const ProfilePage = async () => {
   const session = await auth();
-  const UserData = await getUserByEmail(session?.user?.email!)
+  const UserData = await getUserByID(session?.user?.id!)
 
   return (
 

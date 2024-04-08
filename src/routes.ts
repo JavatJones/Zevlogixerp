@@ -13,6 +13,20 @@ export const authRoutes = [
 ];
 
 /**
+ * Estas rutas son usadas para bloquear o no al usuario
+ */
+export const protectedRoutes = [
+    "/billing",
+    "/contacts",
+    "/financial",
+    "/loads",
+    "/quotes",
+    "/sales",
+    "/settings",
+];
+
+
+/**
  * El prefijo para la Api de autentificación
  * Las rutas que empiezan con este prefijo son usadas para API Autentificacion propositos
  */

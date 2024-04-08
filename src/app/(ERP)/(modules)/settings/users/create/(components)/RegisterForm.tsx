@@ -48,6 +48,7 @@ const RegisterForm = () => {
             loads: false,
             sales: false,
             finances: false,
+            quotes: false,
             billing: false,
             contacts: false
         }
@@ -198,6 +199,29 @@ const RegisterForm = () => {
                                         <div className='flex flex-row justify-between items-center'>
                                             <FormLabel className='text-md'>
                                                 Ventas
+                                            </FormLabel>
+                                            <FormControl>
+
+                                                <Switch
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                        </div>
+                                        <FormMessage></FormMessage>
+                                    </FormItem>
+                                }}>
+                            </FormField>
+
+                            {/* Cotizaciones */}
+                            <FormField
+                                control={form.control}
+                                name='quotes'
+                                render={({ field }) => {
+                                    return <FormItem>
+                                        <div className='flex flex-row justify-between items-center'>
+                                            <FormLabel className='text-md'>
+                                                Cotizaciones
                                             </FormLabel>
                                             <FormControl>
 

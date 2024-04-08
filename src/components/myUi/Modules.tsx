@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import Link from 'next/link';
-
+import { auth } from '@/lib/auth'
 
 //icons
 import { LuSlidersHorizontal } from "react-icons/lu";
@@ -20,111 +20,82 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { HiCreditCard } from "react-icons/hi2";
 import { BsClipboard2DataFill } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
-
-const modules = [
-    {
-        id: 1,
-        icon: <FaShippingFast />,
-        name: "Embarques",
-        route: "loads"
-    },
-    {
-        id: 2,
-        icon: <FaFileInvoice />,
-        name: "Cotización",
-        route: "quote"
-    },
-    {
-        id: 3,
-        icon: <HiCreditCard />,
-        name: "Facturación",
-        route: "billing"
-    },
-    {
-        id: 4,
-        icon: <BsClipboard2DataFill />,
-        name: "Finanzas",
-        route: "financial"
-    },
-    {
-        id: 5,
-        icon: <GiTakeMyMoney />,
-        name: "Ventas",
-        route: "sales"
-    },
-    {
-        id: 6,
-        icon: <RiContactsBookFill />,
-        name: "Contactos",
-        route: "contacts"
-    },
-    {
-        id: 7,
-        icon: <LuSlidersHorizontal />,
-        name: "Configuraciones",
-        route: "settings"
-    },
-];
+import { GiMoneyStack } from "react-icons/gi";
+import { getUserByID } from '@/data/user';
 
 const Modules = async () => {
-    return (
-       
-            <article className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5'>
 
-                {/* Logistica */}
+    const session = await auth();
+    const existingUser = await getUserByID(session?.user?.id!)
+
+    return (
+
+        <article className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5'>
+
+            {/* Logistica */}
+
+            {existingUser?.loads ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Logistica</p>
+                    {existingUser?.loads && (
+                        <Link href={`/loads`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
-                    <Link href={`/loads`} className='hover:scale-105 transition-all'>
-                        <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><FaShippingFast /></p>
+                                </div>
 
-                            <div className='flex items-center justify-center'>
-                                <p className='text-5xl text-red-600'><FaShippingFast /></p>
-                            </div>
-
-                            <div className='flex flex-col items-center justify-center'>
-                                <p className='truncate'>Embarques</p>
-                            </div>
-                        </Card>
-                    </Link>
-
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Embarques</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
                 </div>
+                :
+                <></>
+            }
 
-                {/* Ventas */}
+
+            {/* Ventas */}
+            {existingUser?.quotes || existingUser?.sales ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Ventas</p>
+                    {existingUser?.quotes && (
+                        <Link href={`/quotes`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
-                    <Link href={`/quotes`} className='hover:scale-105 transition-all'>
-                        <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><FaFileInvoice /></p>
+                                </div>
 
-                            <div className='flex items-center justify-center'>
-                                <p className='text-5xl text-red-600'><FaFileInvoice /></p>
-                            </div>
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Cotizaciones</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
+                    {existingUser?.sales && (
+                        <Link href={`/sales`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
-                            <div className='flex flex-col items-center justify-center'>
-                                <p className='truncate'>Cotizaciones</p>
-                            </div>
-                        </Card>
-                    </Link>
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><GiTakeMyMoney /></p>
+                                </div>
 
-
-
-                    <Link href={`/sales`} className='hover:scale-105 transition-all'>
-                        <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
-
-                            <div className='flex items-center justify-center'>
-                                <p className='text-5xl text-red-600'><GiTakeMyMoney /></p>
-                            </div>
-
-                            <div className='flex flex-col items-center justify-center'>
-                                <p className='truncate'>Ventas</p>
-                            </div>
-                        </Card>
-                    </Link>
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Ventas</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
                 </div>
+                :
+                <></>
+            }
 
-                {/* Finanzas */}
-                <div className='flex flex-col space-y-5'>
+            {/* Finanzas */}
+            {/* <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Finanzas</p>
 
                     <Link href={`/financial`} className='hover:scale-105 transition-all'>
@@ -152,46 +123,93 @@ const Modules = async () => {
                             </div>
                         </Card>
                     </Link>
-                </div>
+                </div> */}
 
-                {/* Social */}
+            {existingUser?.finances || existingUser?.billing ?
+                <div className='flex flex-col space-y-5'>
+                    <p className='truncate font-medium text-xl'>Finanzas</p>
+                    {existingUser?.finances && (
+                        <Link href={`/financial`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><BsClipboard2DataFill /></p>
+                                </div>
+
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Finanzas</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
+                    {existingUser?.billing && (
+                        <Link href={`/billing`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><HiCreditCard /></p>
+                                </div>
+
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Facturación</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
+                </div>
+                :
+                <></>
+            }
+
+
+            {/* Social */}
+            {existingUser?.contacts ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Social</p>
+                    {existingUser?.contacts && (
+                        <Link href={`/contacts`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
-                    <Link href={`/contacts`} className='hover:scale-105 transition-all'>
-                        <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><RiContactsBookFill /></p>
+                                </div>
 
-                            <div className='flex items-center justify-center'>
-                                <p className='text-5xl text-red-600'><RiContactsBookFill /></p>
-                            </div>
-
-                            <div className='flex flex-col items-center justify-center'>
-                                <p className='truncate'>Contactos</p>
-                            </div>
-                        </Card>
-                    </Link>
-
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Contactos</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
                 </div>
+                :
+                <></>
+            }
 
-                {/* Administración */}
+
+            {/* Administración */}
+            {existingUser?.admin ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Administración</p>
+                    {existingUser?.admin && (
+                        <Link href={`/settings`} className='hover:scale-105 transition-all'>
+                            <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
-                    <Link href={`/settings`} className='hover:scale-105 transition-all'>
-                        <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+                                <div className='flex items-center justify-center'>
+                                    <p className='text-5xl text-red-600'><IoIosSettings /></p>
+                                </div>
 
-                            <div className='flex items-center justify-center'>
-                                <p className='text-5xl text-red-600'><IoIosSettings /></p>
-                            </div>
-
-                            <div className='flex flex-col items-center justify-center'>
-                                <p className='truncate'>Configuraciones</p>
-                            </div>
-                        </Card>
-                    </Link>
+                                <div className='flex flex-col items-center justify-center'>
+                                    <p className='truncate'>Configuraciones</p>
+                                </div>
+                            </Card>
+                        </Link>
+                    )}
                 </div>
+                :
+                <></>
+            }
 
-            </article>
+        </article>
     )
 }
 

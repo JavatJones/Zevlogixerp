@@ -12,7 +12,7 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
         return { error: "Invalid fields!" }
     }
 
-    const { id, name, email: newEmail, admin, loads, finances, billing, contacts } = validatedFields.data;
+    const { id, name, email: newEmail, quotes, sales, admin, loads, finances, billing, contacts } = validatedFields.data;
 
 
     //Check if the user exists
@@ -46,7 +46,9 @@ const updateUser = async (values: z.infer<typeof UpdateSchema>) => {
                 loads,
                 finances,
                 billing,
-                contacts
+                contacts,
+                quotes,
+                sales
             },
         });
     } catch (error) {

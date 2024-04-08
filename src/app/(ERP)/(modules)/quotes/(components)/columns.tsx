@@ -17,18 +17,31 @@ import Link from "next/link";
 export type schema = {
     id: string
     load: string
+    // typeUnit: string
 };
 
 
 export const columns: ColumnDef<schema>[] = [
 
-    {
-        accessorKey: "id",
-        header: "Id",
-    },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
     {
         accessorKey: "load",
         header: "Load",
+    },
+    {
+        accessorKey: "nationality",
+        header: "Nacionalidad",
+    },
+    {
+        accessorKey: "transport_unit",
+        header: "Unidad de transporte",
+    },
+    {
+        accessorKey: "transport_type",
+        header: "Tipo de transporte",
     },
     {
         id: "actions",

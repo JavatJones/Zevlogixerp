@@ -19,6 +19,7 @@ model User {
   admin      Boolean
   loads      Boolean
   finances   Boolean
+  quotes     Boolean
   sales      Boolean
   billing    Boolean
   contacts   Boolean
@@ -47,7 +48,44 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-//--- --- 
+//--- Sistema --- 
+
+// 1- Cotizar
+model Quotation {
+  //ID de una cotización
+  id String @id @default(cuid())
+
+  //Campos para homologar a un load
+  nationality    String // Nacional / Internacional
+  transport_unit String // Dedicado / Consolidado
+  transport_type String // Maritimo, Aereo, Terrestre, Ferroviario
+
+  //ubicación origen
+  origin_codePostal String
+  origin_city       String
+  origin_state      String
+  origin_country    String
+
+  //Dedicado 
+
+  //consolidado
+  consolidated         String?
+  consolidated_pallets String?
+
+  //extra
+
+  //Seleccionar al cliente en cuestión para obtener a quien esta dirigida la cotización/embarque y su dirección de ubicación.
+  Contact   Contact? @relation(fields: [contactId], references: [id])
+  contactId String?
+
+  //dirección de destino
+  Address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?
+
+  //Data general
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @updatedAt @db.Timestamp(0)
+}
 
 //Módulo de loads
 model Load {
@@ -91,7 +129,7 @@ model fees {
 
 //Módulo de contactos
 model Contact {
-  id             String    @id @default(cuid())
+  id             String      @id @default(cuid())
   type           String
   name           String
   rfc            String
@@ -99,20 +137,26 @@ model Contact {
   AddressContact Address[]
   Loads          Load[]
   Fees           fees[]
-  created_at     DateTime  @default(now()) @db.Timestamp(0)
-  updated_at     DateTime  @updatedAt @db.Timestamp(0)
+  created_at     DateTime    @default(now()) @db.Timestamp(0)
+  updated_at     DateTime    @updatedAt @db.Timestamp(0)
+  Quotation      Quotation[]
 }
 
 model Address {
-  id         String   @id @default(cuid())
+  id         String  @id @default(cuid())
   name       String?
   address    String
   codePostal String
   city       String
   state      String
   country    String
-  Contact    Contact? @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  contactId  String?
+
+  //relaciones
+  Contact   Contact?    @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  contactId String?
+  Quotation Quotation[]
+
+  //info
   created_at DateTime @default(now()) @db.Timestamp(0)
   updated_at DateTime @updatedAt @db.Timestamp(0)
 }

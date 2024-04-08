@@ -15,12 +15,12 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link';
 import { auth, signOut } from '@/lib/auth'
-import { getUserByEmail } from '@/data/user';
+import { getUserByID } from '@/data/user';
 
 const DropdownMenuNavBar = async () => {
     const session = await auth();
 
-    const UserData = await getUserByEmail(session?.user?.email!)
+    const UserData = await getUserByID(session?.user?.id!)
 
     return (
         <DropdownMenu>

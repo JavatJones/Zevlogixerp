@@ -8,7 +8,7 @@ const HomePage = async () => {
 
   return (
     <section className='flex flex-col '>
-      {/* {JSON.stringify(session)} */}
+      {JSON.stringify(session)}
       <Modules></Modules>
     </section>
   )
