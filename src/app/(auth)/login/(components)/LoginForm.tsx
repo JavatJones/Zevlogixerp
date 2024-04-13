@@ -78,7 +78,7 @@ const LoginForm = () => {
             </div>
             <Card className='flex flex-col w-full max-w-md'>
                 <CardHeader>
-                    <CardTitle className='font-bold text-center text-3xl'>Aldevaram</CardTitle>
+                    <CardTitle className='font-bold text-center text-3xl'>!Company_Name!</CardTitle>
                     <CardDescription className='text-center'>¡Bienvenido de vuelta!</CardDescription>
                 </CardHeader>
                 <CardContent >
