@@ -4,9 +4,9 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Aldevaram ERP",
-    "short_name": "Aldevaram",
-    "description": "Sistema ERP de Aldevaram",
+    "name": "ERP",
+    "short_name": "ERP",
+    "description": "Sistema ERP",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

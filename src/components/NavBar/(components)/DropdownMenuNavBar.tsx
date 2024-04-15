@@ -31,7 +31,7 @@ const DropdownMenuNavBar = async () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className='mx-2' align="center">
                 <DropdownMenuLabel asChild className='text-center w-[140px]'>
-                    <p className='truncate'>{UserData?.name}</p>
+                    <p className='truncate'>Demo Account</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className='flex flex-col'>

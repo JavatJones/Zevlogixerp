@@ -23,6 +23,12 @@ import { IoIosSettings } from "react-icons/io";
 import { GiMoneyStack } from "react-icons/gi";
 import { getUserByID } from '@/data/user';
 
+//lucid icons
+import { Package } from 'lucide-react';
+import { Cpu } from 'lucide-react';
+import { MdPrecisionManufacturing } from "react-icons/md";
+import { MdAdminPanelSettings } from "react-icons/md";
+
 const Modules = async () => {
 
     const session = await auth();
@@ -34,7 +40,7 @@ const Modules = async () => {
 
             {/* Logistica */}
 
-            {existingUser?.loads ?
+            {/* {existingUser?.loads ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Logistica</p>
                     {existingUser?.loads && (
@@ -54,11 +60,11 @@ const Modules = async () => {
                 </div>
                 :
                 <></>
-            }
+            } */}
 
 
             {/* Ventas */}
-            {existingUser?.quotes || existingUser?.sales ?
+            {/* {existingUser?.quotes || existingUser?.sales ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Ventas</p>
                     {existingUser?.quotes && (
@@ -92,7 +98,7 @@ const Modules = async () => {
                 </div>
                 :
                 <></>
-            }
+            } */}
 
             {/* Finanzas */}
             {/* <div className='flex flex-col space-y-5'>
@@ -125,7 +131,7 @@ const Modules = async () => {
                     </Link>
                 </div> */}
 
-            {existingUser?.finances || existingUser?.billing ?
+            {/* {existingUser?.finances || existingUser?.billing ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Finanzas</p>
                     {existingUser?.finances && (
@@ -159,11 +165,11 @@ const Modules = async () => {
                 </div>
                 :
                 <></>
-            }
+            } */}
 
 
             {/* Social */}
-            {existingUser?.contacts ?
+            {/* {existingUser?.contacts ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Social</p>
                     {existingUser?.contacts && (
@@ -183,11 +189,11 @@ const Modules = async () => {
                 </div>
                 :
                 <></>
-            }
+            } */}
 
 
             {/* Administración */}
-            {existingUser?.admin ?
+            {/* {existingUser?.admin ?
                 <div className='flex flex-col space-y-5'>
                     <p className='truncate font-medium text-xl'>Administración</p>
                     {existingUser?.admin && (
@@ -207,7 +213,52 @@ const Modules = async () => {
                 </div>
                 :
                 <></>
-            }
+            } */}
+
+            <div className='flex flex-col space-y-5'>
+                <p className='truncate font-medium text-xl'>Inventario</p>
+                <Link href={`/inventory`} className='hover:scale-105 transition-all'>
+                    <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+                        <div className='flex items-center justify-center'>
+                            <p className='text-5xl text-red-600'><Package size={55} /></p>
+                        </div>
+
+                        <div className='flex flex-col items-center justify-center'>
+                            <p className='truncate'>Inventario</p>
+                        </div>
+                    </Card>
+                </Link>
+
+                <Link href={`/manufacturing`} className='hover:scale-105 transition-all'>
+                    <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+                        <div className='flex items-center justify-center'>
+                            <p className='text-5xl text-red-600'><MdPrecisionManufacturing size={55} /></p>
+                        </div>
+
+                        <div className='flex flex-col items-center justify-center'>
+                            <p className='truncate'>Manufactura</p>
+                        </div>
+                    </Card>
+                </Link>
+            </div>
+
+            <div className='flex flex-col space-y-5'>
+                <p className='truncate font-medium text-xl'>Administración</p>
+                <Link href={`/administration`} className='hover:scale-105 transition-all'>
+                    <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
+
+                        <div className='flex items-center justify-center'>
+                            <p className='text-5xl text-red-600'><MdAdminPanelSettings size={55} /></p>
+                        </div>
+
+                        <div className='flex flex-col items-center justify-center'>
+                            <p className='truncate'>Administración</p>
+                        </div>
+                    </Card>
+                </Link>
+            </div>
 
         </article>
     )

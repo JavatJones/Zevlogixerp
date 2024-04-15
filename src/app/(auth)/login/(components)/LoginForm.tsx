@@ -31,6 +31,7 @@ import { FormError } from '@/components/forms/form-error'
 import { FormSuccess } from '@/components/forms/form-success'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 
 const LoginForm = () => {
@@ -134,13 +135,14 @@ const LoginForm = () => {
                                 }}>
                             </FormField>
 
-                            <Button type='submit' disabled={isPending}>
-
-                                {isPending ?
-                                    <p>Cargando...</p>
-                                    :
-                                    <p>Entrar</p>
-                                }
+                            <Button asChild disabled={isPending}>
+                                <Link href={'/'}>
+                                    {isPending ?
+                                        <p>Cargando...</p>
+                                        :
+                                        <p>Entrar</p>
+                                    }
+                                </Link>
                             </Button>
                         </form>
                     </Form>

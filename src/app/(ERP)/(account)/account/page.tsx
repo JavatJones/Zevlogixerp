@@ -26,7 +26,7 @@ const ProfilePage = async () => {
 
     <Card>
       <CardHeader>
-        <CardTitle>{UserData?.name}</CardTitle>
+        <CardTitle>Demo Account</CardTitle>
       </CardHeader>
       <CardContent className='flex flex-col'>
 
