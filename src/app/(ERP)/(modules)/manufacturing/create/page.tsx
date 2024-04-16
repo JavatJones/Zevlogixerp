@@ -1,5 +1,5 @@
-"use client"
-import React from 'react'
+'use client'
+import React, { useState, ChangeEvent } from 'react';
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
@@ -342,7 +342,20 @@ import { Input } from '@/components/ui/input'
 const CreateOrderProduction = () => {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
-    const [quantity, setQuantity] = React.useState()
+
+    const [quantity, setQuantity] = React.useState<number>(0)
+
+    // Controlador de cambio para manejar cuando cambia el valor del input
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        // Actualizar el estado con el nuevo valor del input
+        setQuantity(parseInt(event.target.value));
+    };
+
+    // Función para calcular la multiplicación
+    const calcQuantity = (cantidad: number): number => {
+        return cantidad * quantity;
+    };
+
 
     const [date, setDate] = React.useState<Date | undefined>(new Date())
     const formattedDate = date ? date.toLocaleDateString() : '';
@@ -429,8 +442,11 @@ const CreateOrderProduction = () => {
                                                     Cantidad a producir
                                                 </label>
 
-                                                <Input type='number' defaultValue={1} />
-
+                                                <Input
+                                                    type='number'
+                                                    value={quantity}
+                                                    onChange={handleChange}
+                                                />
                                             </div>
                                             <div className='flex flex-col space-y-2 w-full'>
                                                 <label className='text-md'>
@@ -506,7 +522,10 @@ const CreateOrderProduction = () => {
                                                 </TableCell>
 
                                                 <TableCell className="">
-                                                    <p className='truncate w-[130px]'>{data.cantidad_disponible}</p>
+                                                    <p className='truncate w-[130px]'>{
+                                                        isNaN(quantity) ? '0' : calcQuantity(data.cantidad_disponible)
+                                                    }
+                                                    </p>
                                                 </TableCell>
 
                                                 <TableCell>
