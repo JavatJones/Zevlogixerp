@@ -180,8 +180,54 @@ const EditForm: React.FC<getActualData> = (props) => {
                 }}>
               </FormField>
 
-              {/* Cargamentos */}
+              {/* inventario */}
               <FormField
+                control={form.control}
+                name='loads'
+                render={({ field }) => {
+                  return <FormItem>
+                    <div className='flex flex-row justify-between items-center'>
+                      <FormLabel className='text-md'>
+                        Inventario
+                      </FormLabel>
+                      <FormControl>
+
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage></FormMessage>
+                  </FormItem>
+                }}>
+              </FormField>
+
+              {/* Manufactura */}
+              <FormField
+                control={form.control}
+                name='sales'
+                render={({ field }) => {
+                  return <FormItem>
+                    <div className='flex flex-row justify-between items-center'>
+                      <FormLabel className='text-md'>
+                        Manufactura
+                      </FormLabel>
+                      <FormControl>
+
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage></FormMessage>
+                  </FormItem>
+                }}>
+              </FormField>
+
+              {/* Cargamentos */}
+              {/* <FormField
                 control={form.control}
                 name='loads'
                 render={({ field }) => {
@@ -202,10 +248,10 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
               {/* Finanzas */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='finances'
                 render={({ field }) => {
@@ -226,10 +272,10 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
               {/* facturación */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='billing'
                 render={({ field }) => {
@@ -250,10 +296,10 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
               {/* sales */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='sales'
                 render={({ field }) => {
@@ -274,10 +320,10 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
-                {/* quotes */}
-                <FormField
+              {/* quotes */}
+              {/* <FormField
                 control={form.control}
                 name='quotes'
                 render={({ field }) => {
@@ -298,10 +344,10 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
               {/* contactos */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='contacts'
                 render={({ field }) => {
@@ -322,7 +368,7 @@ const EditForm: React.FC<getActualData> = (props) => {
                     <FormMessage></FormMessage>
                   </FormItem>
                 }}>
-              </FormField>
+              </FormField> */}
 
 
             </div>

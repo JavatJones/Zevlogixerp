@@ -411,7 +411,7 @@ const EditOrder = () => {
                                     <PopoverContent className="w-[200px] p-0 h-96 ">
                                         <Command>
                                             <CommandInput placeholder="Buscar..." />
-                                            <CommandEmpty>No product found.</CommandEmpty>
+                                            <CommandEmpty>Producto no encontrado.</CommandEmpty>
                                             <CommandGroup>
                                                 {products.map((product) => (
                                                     <CommandItem

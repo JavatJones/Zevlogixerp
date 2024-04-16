@@ -246,7 +246,7 @@ const Modules = async () => {
 
             <div className='flex flex-col space-y-5'>
                 <p className='truncate font-medium text-xl'>Administración</p>
-                <Link href={`/administration`} className='hover:scale-105 transition-all'>
+                <Link href={`/settings`} className='hover:scale-105 transition-all'>
                     <Card className='flex flex-col items-center justify-center p-5 gap-3 drop-shadow-xl '>
 
                         <div className='flex items-center justify-center'>

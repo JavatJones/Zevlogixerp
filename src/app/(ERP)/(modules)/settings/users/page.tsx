@@ -10,10 +10,22 @@ import { ChevronLeftCircle } from 'lucide-react';
 
 export const dynamic = 'force-dynamic'
 
+const usersdt = [
+  {
+    id: "1",
+    name: "test account",
+    email: "test@test.com"
+  },
+  {
+    id: "2",
+    name: "dev account",
+    email: "dev@dev.com"
+  }
+]
 
 async function getData(): Promise<UserInfoSchema[]> {
   // Fetch data from your API here.
-  const users = await getAllUsers();
+  const users = usersdt
 
   if (!users) {
     // Manejar el caso en que loads sea null
@@ -45,7 +57,7 @@ const UserPage = async () => {
         </h1>
       </div>
       <DataTable columns={columns} data={data} />
-      
+
     </section>
   )
 }

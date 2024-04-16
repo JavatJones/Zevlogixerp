@@ -167,7 +167,7 @@ const RegisterForm = () => {
                                 }}>
                             </FormField>
 
-                            {/* Cargamentos */}
+                            {/* inventario */}
                             <FormField
                                 control={form.control}
                                 name='loads'
@@ -175,7 +175,7 @@ const RegisterForm = () => {
                                     return <FormItem>
                                         <div className='flex flex-row justify-between items-center'>
                                             <FormLabel className='text-md'>
-                                                Embarques
+                                                Inventario
                                             </FormLabel>
                                             <FormControl>
 
@@ -190,7 +190,7 @@ const RegisterForm = () => {
                                 }}>
                             </FormField>
 
-                            {/* Ventas */}
+                            {/* Manufactura */}
                             <FormField
                                 control={form.control}
                                 name='sales'
@@ -198,7 +198,7 @@ const RegisterForm = () => {
                                     return <FormItem>
                                         <div className='flex flex-row justify-between items-center'>
                                             <FormLabel className='text-md'>
-                                                Ventas
+                                                Manufactura
                                             </FormLabel>
                                             <FormControl>
 
@@ -214,7 +214,7 @@ const RegisterForm = () => {
                             </FormField>
 
                             {/* Cotizaciones */}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name='quotes'
                                 render={({ field }) => {
@@ -234,10 +234,10 @@ const RegisterForm = () => {
                                         <FormMessage></FormMessage>
                                     </FormItem>
                                 }}>
-                            </FormField>
+                            </FormField> */}
 
                             {/* Finanzas */}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name='finances'
                                 render={({ field }) => {
@@ -257,10 +257,10 @@ const RegisterForm = () => {
                                         <FormMessage></FormMessage>
                                     </FormItem>
                                 }}>
-                            </FormField>
+                            </FormField> */}
 
                             {/* facturación */}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name='billing'
                                 render={({ field }) => {
@@ -280,10 +280,10 @@ const RegisterForm = () => {
                                         <FormMessage></FormMessage>
                                     </FormItem>
                                 }}>
-                            </FormField>
+                            </FormField> */}
 
                             {/* Modulo de contactos */}
-                            <FormField
+                            {/* <FormField
                                 control={form.control}
                                 name='contacts'
                                 render={({ field }) => {
@@ -303,7 +303,7 @@ const RegisterForm = () => {
                                         <FormMessage></FormMessage>
                                     </FormItem>
                                 }}>
-                            </FormField>
+                            </FormField> */}
 
                         </div>
 

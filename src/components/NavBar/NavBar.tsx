@@ -17,7 +17,7 @@ const NavBar = () => {
         <header className='fixed top-0 z-50 w-full  bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 '>
             <nav>
                 <article className='container h-14 hidden lg:flex flex-row justify-between items-center'>
-                    <Link href={"/"} className='text-xl hover:scale-105 transition-all'>Zevosos</Link>
+                    <Link href={"/"} className='text-xl hover:scale-105 transition-all'>ZEVLOGIX ERP</Link>
                     <div className='flex flex-row space-x-5'>
                         <ToggleTheme></ToggleTheme>
                         <DropdownMenuNavBar></DropdownMenuNavBar>
@@ -25,7 +25,7 @@ const NavBar = () => {
                 </article>
 
                 <article className='container h-14 flex lg:hidden flex-row justify-between items-center'>
-                    <Link href={"/"} className='text-xl hover:scale-105 transition-all'>!Company_Name!</Link>
+                    <Link href={"/"} className='text-xl hover:scale-105 transition-all'>ZEVLOGIX ERP</Link>
                     <Drawler></Drawler>
                 </article>
             </nav>

@@ -10,9 +10,28 @@ import { getUserByID } from '@/data/user'
 import UserNotFound from './(components)/UserNotFound';
 import EditForm from './(components)/EditForm';
 
+
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  admin: boolean;
+  loads: boolean;
+  finances: boolean;
+  billing: boolean;
+  contacts: boolean;
+  sales: boolean;
+  quotes: boolean;
+}
+
+const userdata: UserData[] = [
+  { id: "1", name: "test account", email: "test@test.com", admin: false, loads: false, finances: false, billing: false, contacts: false, sales: false, quotes: false },
+  { id: "2", name: "dev account", email: "dev@dev.com", admin: false, loads: false, finances: false, billing: false, contacts: false, sales: false, quotes: false }
+];
+
 const UserIDPage = async ({ params }: { params: { UserID: string } }) => {
 
-  const user = await getUserByID(params.UserID);
+  const user = userdata.find(user => user.id === (params.UserID));
 
   if (!user) {
     // Si el usuario no existe, devolver una página de error

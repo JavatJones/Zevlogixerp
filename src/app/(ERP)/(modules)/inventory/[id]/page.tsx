@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -56,7 +57,18 @@ import {
 } from "@/components/ui/tooltip"
 import { IoEyeOutline } from "react-icons/io5";
 import { Textarea } from "@/components/ui/textarea"
-
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+} from "@/components/ui/command"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 const items = [
     // {
     //     id: 1,
@@ -177,14 +189,53 @@ const items = [
 
 ]
 
+const products = [
+    {
+        value: "Batido de fresas",
+        label: "Batido de fresas",
+    },
+    {
+        value: "Arroz",
+        label: "Azucar",
+    },
+    {
+        value: "Avena",
+        label: "Avena",
+    },
+    {
+        value: "Whey Protein",
+        label: "Whey Protein",
+    },
+    {
+        value: "Fresa",
+        label: "Fresa",
+    },
+    {
+        value: "Leche",
+        label: "Leche",
+    },
+    {
+        value: "Platano",
+        label: "Platano",
+    },
 
+    {
+        value: "Café",
+        label: "Café",
+    },
+
+]
+import { Check, ChevronsUpDown } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { Input } from '@/components/ui/input';
 
 const ItemPage = ({ params }: { params: { id: string } }) => {
-
+    const [open, setOpen] = React.useState(false)
+    const [value, setValue] = React.useState("")
     return (
         <div className='flex flex-col space-y-5'>
             <div className='flex flex-row items-center space-x-4'>
@@ -288,7 +339,7 @@ const ItemPage = ({ params }: { params: { id: string } }) => {
 
                                     <div className='flex flex-col space-y-2 '>
                                         <p>Descripción</p>
-                                        <Textarea className='max-h-96' defaultValue={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lacus nec eros efficitur suscipit eget eu sapien.'}/>
+                                        <Textarea className='max-h-96' defaultValue={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec lacus nec eros efficitur suscipit eget eu sapien.'} />
 
                                     </div>
 
@@ -572,9 +623,65 @@ const ItemPage = ({ params }: { params: { id: string } }) => {
                         <TabsContent value="manufacturing" className='flex flex-col space-y-5'>
                             <p>Componentes de receta</p>
                             <div className='flex flex-row space-x-5 justify-end'>
-                                <Button>
-                                    Agregar
-                                </Button>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button>Agregar</Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Agregar a receta</AlertDialogTitle>
+                                            <AlertDialogDescription>
+
+                                                <Popover open={open} onOpenChange={setOpen}>
+                                                    <PopoverTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            role="combobox"
+                                                            aria-expanded={open}
+                                                            className=" justify-between w-full"
+                                                       
+                                                        >
+                                                            {value !== "" ? <p className='capitalize'>{value}</p>
+                                                                : "Lista de productos..."}
+                                                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                        </Button>
+                                                    </PopoverTrigger>
+                                                    <PopoverContent className="p-0 h-96 ">
+                                                        <Command>
+                                                            <CommandInput placeholder="Buscar..." />
+                                                            <CommandEmpty>Producto no encontrado.</CommandEmpty>
+                                                            <CommandGroup>
+                                                                {products.map((product) => (
+                                                                    <CommandItem
+                                                                        key={product.label}
+                                                                        value={product.label}
+                                                                        onSelect={(currentValue) => {
+                                                                            setValue(currentValue === value ? "" : currentValue)
+                                                                            setOpen(false)
+                                                                        }}
+                                                                    >
+                                                                        <Check
+                                                                            className={cn(
+                                                                                "mr-2 h-4 w-4",
+                                                                                product.label === value ? "opacity-100" : "opacity-0"
+                                                                            )}
+                                                                        />
+                                                                        {product.label}
+                                                                    </CommandItem>
+                                                                ))}
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                            <AlertDialogAction>Agregar</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+
                             </div>
 
                             <Table>
